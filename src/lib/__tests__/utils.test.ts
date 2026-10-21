@@ -91,3 +91,15 @@ describe("confirmación", () => {
     expect(ics.endsWith("END:VCALENDAR\r\n")).toBe(true);
   });
 });
+
+describe("formatos de horario", () => {
+  it("horas cortas y duraciones", async () => {
+    const { formatTimeShort, formatRangeShort, blocksMinutes, formatDuration } = await import("../tz");
+    expect(formatTimeShort("09:00")).toBe("9 a. m.");
+    expect(formatTimeShort("13:30")).toBe("1:30 p. m.");
+    expect(formatRangeShort("09:00", "13:00")).toBe("9 a. m. a 1 p. m.");
+    expect(blocksMinutes([{ start_time: "09:00", end_time: "13:00" }, { start_time: "14:00", end_time: "18:30" }])).toBe(510);
+    expect(formatDuration(510)).toBe("8 h 30 min");
+    expect(formatDuration(2400)).toBe("40 h");
+  });
+});

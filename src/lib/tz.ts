@@ -155,3 +155,29 @@ export function formatDateShort(date: string): string {
   const [, m, d] = date.split("-").map(Number);
   return `${WEEKDAY_SHORT[weekdayOf(date)].toLowerCase()} ${d} ${MONTH_NAMES[m - 1].slice(0, 3)}`;
 }
+
+/** "9 a. m." o "9:30 a. m." (sin ":00") para tablas compactas. */
+export function formatTimeShort(time: string): string {
+  const [h, m] = time.split(":").map(Number);
+  const suffix = h < 12 ? "a. m." : "p. m.";
+  const h12 = h % 12 === 0 ? 12 : h % 12;
+  return m ? `${h12}:${String(m).padStart(2, "0")} ${suffix}` : `${h12} ${suffix}`;
+}
+
+/** "9 a. m. a 1 p. m." */
+export function formatRangeShort(start: string, end: string): string {
+  return `${formatTimeShort(start)} a ${formatTimeShort(end)}`;
+}
+
+/** Minutos totales de una lista de bloques 'HH:MM'. */
+export function blocksMinutes(blocks: { start_time: string; end_time: string }[]): number {
+  return blocks.reduce((sum, b) => sum + timeToMinutes(b.end_time) - timeToMinutes(b.start_time), 0);
+}
+
+/** 2400 → "40 h", 2430 → "40 h 30 min". */
+export function formatDuration(minutes: number): string {
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  if (!h) return `${m} min`;
+  return m ? `${h} h ${m} min` : `${h} h`;
+}

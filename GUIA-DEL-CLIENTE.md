@@ -77,18 +77,28 @@ Otras cosas que puedes hacer en Barberos:
 
 ## Cambiar los horarios
 
-1. Ve a **Más → Horarios**.
-2. Toca el nombre del barbero arriba.
-3. Para cada día:
-   - El **interruptor** indica si trabaja ese día.
-   - Cambia las horas **desde** y **hasta**.
-   - ¿Tiene pausa para almorzar? Toca **Agregar otro bloque**. Ejemplo: 9:00 a 1:00 y 2:00 a 6:00.
-   - **Copiar a los demás** pone el mismo horario en todos los días que trabaja.
-4. Toca **Guardar horario** (abajo).
+Ve a **Más → Horarios**. La página tiene dos partes:
+
+**1. Semana del equipo.** Arriba ves a todos los barberos y qué días trabajan (en el celular, los días en negro son los que trabaja), con el total de horas de la semana. Toca un barbero para cambiar su horario.
+
+**2. Horario del barbero elegido.**
+
+- **Aplicar un horario a varios días** (la forma más rápida):
+  1. Marca los días. Hay atajos: *Lunes a viernes*, *Lunes a sábado* o *Todos*.
+  2. Elige el horario: *Corrido, 9 a 6*, *Con almuerzo, 9 a 1 y 2 a 6*, *Solo mañana*, *Solo tarde* o *No trabaja*.
+  3. Toca **Aplicar a … días**.
+- **Día por día**: para ajustar un día en particular.
+  - El **interruptor** indica si trabaja ese día.
+  - Cambia las horas **desde** y **hasta** de cada bloque.
+  - **Agregar bloque** sirve para la pausa del almuerzo. Ejemplo: 9:00 a 1:00 y 2:00 a 6:00.
+  - Al lado de cada día ves cuántas horas trabaja.
+- Cuando hay cambios, aparece abajo una barra con **Guardar horario** y **Descartar** (descartar deja todo como estaba).
 
 Si dos bloques del mismo día se cruzan, verás un aviso en rojo y no se podrá guardar hasta corregirlo.
 
 > El horario es el **semanal de siempre**. Para un día puntual (vacaciones, médico, feriado) usa **Bloqueos**.
+
+En la web, la sección **Horario y ubicación** se actualiza sola: muestra el horario de cada día y qué barberos atienden ese día.
 
 ---
 

@@ -91,7 +91,7 @@ select pg_temp.eq(pg_temp.book(:b2, :corte, pg_temp.at_local(3, '12:30'), '04140
 select pg_temp.eq(pg_temp.book(:b2, :corte, pg_temp.at_local(3, '14:00'), '04140000009'), 'OK', 'después del bloqueo ⇒ OK');
 select pg_temp.eq(pg_temp.book(:b1, :corte, pg_temp.at_local(3, '10:00'), '04140000010'), 'OK', 'el bloqueo del barbero 2 no afecta al 1');
 insert into public.time_off (barber_id, starts_at, ends_at, reason)
-values (null, pg_temp.at_local(4, '00:00'), pg_temp.at_local(5, '00:00'), 'Feriado (test)');
+values (null, pg_temp.at_local(4, '00:00'), pg_temp.at_local(4, '00:00') + interval '1 day', 'Feriado (test)');
 select pg_temp.eq(pg_temp.book(:b1, :corte, pg_temp.at_local(4, '10:00'), '04140000010'), 'TIME_OFF', 'bloqueo general (feriado) afecta a todos');
 
 \echo '--- Anticipación y días máximos'

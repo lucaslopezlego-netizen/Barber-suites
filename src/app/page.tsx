@@ -9,7 +9,7 @@ import { formatUsd } from "@/lib/booking-links";
 import { BUSINESS } from "@/lib/business";
 import { whatsappUrl } from "@/lib/phone";
 import { getCatalog, type WeeklyHours } from "@/lib/public-data";
-import { formatTime12, toZonedParts, WEEKDAY_NAMES } from "@/lib/tz";
+import { formatRangeShort, formatTime12, toZonedParts, WEEKDAY_NAMES } from "@/lib/tz";
 
 export const revalidate = 60;
 
@@ -44,6 +44,10 @@ export default async function HomePage() {
   const hours = info?.weekly_hours ?? [];
   const status = hours.length ? todayStatus(hours, tz) : null;
   const todayWeekday = toZonedParts(new Date(), tz).weekday;
+  // Quién atiende cada día (nombres en el orden de la web)
+  const workingHours = catalog?.snapshot.working_hours ?? [];
+  const barbersOn = (weekday: number) =>
+    barbers.filter((b) => workingHours.some((w) => w.barber_id === b.id && w.weekday === weekday)).map((b) => b.name);
   const fromPrice = services.length ? Math.min(...services.map((s) => Number(s.price_usd))) : null;
 
   return (
@@ -217,26 +221,37 @@ export default async function HomePage() {
         </Section>
 
         {/* ------------------------------------------------------------- Visítanos */}
-        <Section id="visitanos" title="Horario y ubicación" note="Centro Comercial Santa Fe, nivel C3, local 20, Baruta. El horario puede variar según cada barbero.">
+        <Section id="visitanos" title="Horario y ubicación" note="Centro Comercial Santa Fe, nivel C3, local 20, Baruta.">
           <div className="grid gap-6 md:grid-cols-2">
-            <div className="card divide-y divide-line self-start">
-              {WEEK_ORDER.map((wd) => {
-                const h = hours.find((x) => x.weekday === wd);
-                const isToday = wd === todayWeekday;
-                return (
-                  <div key={wd} className={`flex items-center justify-between px-5 py-3.5 text-sm ${isToday ? "bg-surface" : ""}`}>
-                    <span className={isToday ? "font-semibold text-onyx" : "text-muted"}>
-                      {WEEKDAY_NAMES[wd]}
-                      {isToday && <span className="ml-2 text-xs font-semibold text-gold">hoy</span>}
-                    </span>
-                    <span className={`tabular-nums ${h?.open ? "text-fg" : "text-subtle"}`}>
-                      {h?.open && h.close ? `${formatTime12(h.open)} a ${formatTime12(h.close)}` : hours.length ? "Cerrado" : "Por confirmar"}
-                    </span>
-                  </div>
-                );
-              })}
+            <div className="self-start">
+              <ul className="card divide-y divide-line">
+                {WEEK_ORDER.map((wd) => {
+                  const h = hours.find((x) => x.weekday === wd);
+                  const isToday = wd === todayWeekday;
+                  const team = barbersOn(wd);
+                  return (
+                    <li key={wd} className={`grid grid-cols-[6.5rem_1fr] gap-x-4 px-5 py-3.5 text-sm ${isToday ? "bg-surface" : ""}`}>
+                      <span className={isToday ? "font-semibold text-onyx" : "text-muted"}>
+                        {WEEKDAY_NAMES[wd]}
+                        {isToday && <span className="ml-2 text-xs font-semibold text-gold">hoy</span>}
+                      </span>
+                      <span>
+                        <span className={`block tabular-nums ${h?.open ? "text-fg" : "text-subtle"}`}>
+                          {h?.open && h.close ? formatRangeShort(h.open, h.close) : hours.length ? "Cerrado" : "Por confirmar"}
+                        </span>
+                        {team.length > 0 && (
+                          <span className="mt-0.5 block text-xs text-subtle">
+                            {team.length === barbers.length && barbers.length > 1 ? "Todo el equipo" : team.join(", ")}
+                          </span>
+                        )}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+              <p className="mt-3 text-xs text-subtle">Debajo de cada día ves quién atiende. Para ver las horas libres de cada barbero, usa la reserva.</p>
             </div>
-            <div className="card overflow-hidden">
+            <div className="card self-start overflow-hidden">
               <iframe
                 title="Mapa: Centro Comercial Santa Fe, Baruta"
                 src={BUSINESS.mapsEmbed}
