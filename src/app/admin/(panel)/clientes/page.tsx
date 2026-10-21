@@ -61,14 +61,14 @@ export default async function ClientesPage({ searchParams }: { searchParams: Pro
           <input id="q" name="q" defaultValue={q} placeholder="Buscar por nombre o teléfono" className="field !pl-11" />
         </div>
         <input type="hidden" name="orden" value={sortKey} />
-        <button className="btn-ghost !py-3">Buscar</button>
+        <button className="btn-secondary !py-3">Buscar</button>
       </form>
       <div className="mb-5 flex flex-wrap gap-2">
         {Object.entries(SORTS).map(([key, s]) => (
           <Link
             key={key}
             href={`/admin/clientes?orden=${key}${q ? `&q=${encodeURIComponent(q)}` : ""}`}
-            className={`rounded-full border px-3.5 py-1.5 text-sm ${sortKey === key ? "border-gold bg-gold/15 text-gold-soft" : "border-line-strong text-muted"}`}
+            className={`rounded-full border px-3.5 py-1.5 text-sm ${sortKey === key ? "border-onyx bg-onyx text-white" : "border-line-strong text-muted"}`}
           >
             {s.label}
           </Link>
@@ -114,9 +114,9 @@ export default async function ClientesPage({ searchParams }: { searchParams: Pro
               </thead>
               <tbody className="divide-y divide-line">
                 {customers.map((c) => (
-                  <tr key={c.phone} className="hover:bg-panel-2/60">
+                  <tr key={c.phone} className="hover:bg-surface-2/60">
                     <td className="px-4 py-3">
-                      <Link href={`/admin/clientes/${encodeURIComponent(c.phone)}`} className="font-semibold hover:text-gold-soft">
+                      <Link href={`/admin/clientes/${encodeURIComponent(c.phone)}`} className="font-semibold hover:text-gold-strong">
                         {c.name}
                       </Link>
                       <p className="text-xs text-muted">{formatPhone(c.phone)}</p>
@@ -125,9 +125,9 @@ export default async function ClientesPage({ searchParams }: { searchParams: Pro
                     <td className={`px-4 py-3 text-right tabular-nums ${c.no_shows > 0 ? "text-danger" : "text-subtle"}`}>{c.no_shows}</td>
                     <td className="px-4 py-3 text-right tabular-nums">{formatUsd(c.total_spent_usd)}</td>
                     <td className="px-4 py-3 capitalize">{fmtDate(c.last_visit)}</td>
-                    <td className="px-4 py-3 capitalize">{c.next_booking ? <span className="text-gold-soft">{fmtDate(c.next_booking)}</span> : "—"}</td>
+                    <td className="px-4 py-3 capitalize">{c.next_booking ? <span className="text-gold-strong">{fmtDate(c.next_booking)}</span> : "—"}</td>
                     <td className="px-4 py-3 text-right">
-                      <Link href={`/admin/clientes/${encodeURIComponent(c.phone)}`} aria-label={`Ver ${c.name}`} className="text-muted hover:text-cream">
+                      <Link href={`/admin/clientes/${encodeURIComponent(c.phone)}`} aria-label={`Ver ${c.name}`} className="text-muted hover:text-fg">
                         <ChevronRight className="inline size-4" />
                       </Link>
                     </td>

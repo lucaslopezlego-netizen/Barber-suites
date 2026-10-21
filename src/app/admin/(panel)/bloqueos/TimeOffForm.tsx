@@ -38,7 +38,7 @@ export function TimeOffForm({ barbers, defaultDate }: { barbers: { id: string; n
               ["hours", "Unas horas"],
             ] as const
           ).map(([v, label]) => (
-            <label key={v} className={`cursor-pointer rounded-xl px-3 py-2.5 text-center font-medium ${kind === v ? "bg-gold text-ink" : "text-muted"}`}>
+            <label key={v} className={`cursor-pointer rounded-xl px-3 py-2.5 text-center font-medium ${kind === v ? "bg-onyx text-white" : "text-muted"}`}>
               <input type="radio" name="kind" value={v} checked={kind === v} onChange={() => setKind(v)} className="sr-only" />
               {label}
             </label>
@@ -91,7 +91,7 @@ export function TimeOffForm({ barbers, defaultDate }: { barbers: { id: string; n
         <input id="reason" name="reason" maxLength={140} placeholder="Ej.: vacaciones, médico, feriado" className="field" />
       </div>
       <FormMessage state={state} />
-      <SubmitButton className="btn-gold w-full">Bloquear</SubmitButton>
+      <SubmitButton className="btn-primary w-full">Bloquear</SubmitButton>
     </form>
   );
 }
@@ -106,7 +106,7 @@ export function DeleteTimeOff({ id }: { id: string }) {
       onClick={() => {
         if (window.confirm("¿Eliminar este bloqueo? Ese horario volverá a estar disponible para reservas.")) start(async () => void (await deleteTimeOff(id)));
       }}
-      className="grid size-10 shrink-0 place-items-center rounded-full text-muted hover:bg-panel-2 hover:text-danger"
+      className="grid size-10 shrink-0 place-items-center rounded-full text-muted hover:bg-surface-2 hover:text-danger"
     >
       {pending ? <Loader2 className="size-4 animate-spin" /> : <Trash2 className="size-4" />}
     </button>

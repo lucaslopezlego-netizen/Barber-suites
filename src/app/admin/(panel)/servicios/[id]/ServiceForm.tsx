@@ -73,8 +73,8 @@ export function ServiceForm({ service, barbers, selected }: Props) {
         <legend className="label">¿Qué barberos lo hacen?</legend>
         <div className="grid gap-2 sm:grid-cols-2">
           {barbers.map((b) => (
-            <label key={b.id} className="flex items-center gap-3 rounded-xl border border-line-strong px-4 py-3 text-sm has-[:checked]:border-gold/60 has-[:checked]:bg-gold/10">
-              <input type="checkbox" name="barber_ids" value={b.id} defaultChecked={isNew ? b.active : selected.includes(b.id)} className="size-5 accent-[var(--color-gold)]" />
+            <label key={b.id} className="flex items-center gap-3 rounded-xl border border-line-strong px-4 py-3 text-sm has-[:checked]:border-onyx has-[:checked]:bg-surface">
+              <input type="checkbox" name="barber_ids" value={b.id} defaultChecked={isNew ? b.active : selected.includes(b.id)} className="size-5 accent-[var(--color-onyx)]" />
               {b.name}
               {!b.active && <span className="text-xs text-subtle">(inactivo)</span>}
             </label>
@@ -82,7 +82,7 @@ export function ServiceForm({ service, barbers, selected }: Props) {
         </div>
       </fieldset>
       <label className="flex items-center gap-3 text-sm">
-        <input type="checkbox" name="active" defaultChecked={service?.active ?? true} className="size-5 accent-[var(--color-gold)]" />
+        <input type="checkbox" name="active" defaultChecked={service?.active ?? true} className="size-5 accent-[var(--color-onyx)]" />
         Activo (se puede reservar)
       </label>
       <FormMessage state={state} />

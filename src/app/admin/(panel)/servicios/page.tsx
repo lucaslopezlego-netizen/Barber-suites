@@ -23,7 +23,7 @@ export default async function ServiciosPage() {
         title="Servicios"
         subtitle="Precios en USD."
         action={
-          <Link href="/admin/servicios/nuevo" className="btn-gold !py-2.5 text-sm">
+          <Link href="/admin/servicios/nuevo" className="btn-primary !py-2.5 text-sm">
             <Plus className="size-4" /> Agregar servicio
           </Link>
         }
@@ -39,7 +39,7 @@ export default async function ServiciosPage() {
                 <div className="min-w-0 flex-1">
                   <div className="flex items-baseline justify-between gap-3">
                     <p className="font-semibold">{s.name}</p>
-                    <p className="font-display text-lg font-semibold text-gold-soft">{formatUsd(s.price_usd)}</p>
+                    <p className="font-display text-lg font-semibold text-gold-strong">{formatUsd(s.price_usd)}</p>
                   </div>
                   <p className="mt-0.5 inline-flex items-center gap-1.5 text-sm text-muted">
                     <Clock className="size-3.5" /> {s.duration_min} min
@@ -50,7 +50,7 @@ export default async function ServiciosPage() {
                 </div>
                 <div className="flex w-full items-center justify-between gap-3 sm:w-auto">
                   <ActiveToggle active={s.active} label={`Activar ${s.name}`} onToggle={toggleServiceActive.bind(null, s.id)} />
-                  <Link href={`/admin/servicios/${s.id}`} className="btn-ghost !px-4 !py-2 text-sm">
+                  <Link href={`/admin/servicios/${s.id}`} className="btn-secondary !px-4 !py-2 text-sm">
                     <Pencil className="size-4" /> Editar
                   </Link>
                 </div>

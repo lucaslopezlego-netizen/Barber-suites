@@ -22,9 +22,9 @@ export function ActiveToggle({ active, onToggle, label }: { active: boolean; onT
             setMsg(r.ok ? null : r.message);
           })
         }
-        className={`relative h-7 w-12 shrink-0 rounded-full transition ${active ? "bg-gold" : "bg-line-strong"} disabled:opacity-60`}
+        className={`relative h-7 w-12 shrink-0 rounded-full transition ${active ? "bg-onyx" : "bg-line-strong"} disabled:opacity-60`}
       >
-        <span className={`absolute top-1 size-5 rounded-full bg-cream shadow transition-all ${active ? "left-6" : "left-1"}`} />
+        <span className={`absolute top-1 size-5 rounded-full bg-white shadow transition-all ${active ? "left-6" : "left-1"}`} />
       </button>
       <span className="w-14 text-xs text-muted">{pending ? <Loader2 className="size-3.5 animate-spin" /> : active ? "Activo" : "Inactivo"}</span>
       {msg && <span className="text-xs text-danger">{msg}</span>}
@@ -35,7 +35,7 @@ export function ActiveToggle({ active, onToggle, label }: { active: boolean; onT
 /** Flechas para subir/bajar en el orden de aparición. */
 export function MoveButtons({ onMove, first, last }: { onMove: (dir: "up" | "down") => Promise<ActionResult>; first: boolean; last: boolean }) {
   const [pending, start] = useTransition();
-  const btn = "grid size-9 place-items-center rounded-full border border-line-strong text-muted hover:text-cream disabled:opacity-25";
+  const btn = "grid size-9 place-items-center rounded-full border border-line-strong text-muted hover:text-fg disabled:opacity-25";
   return (
     <div className="flex gap-1">
       <button type="button" className={btn} disabled={first || pending} onClick={() => start(async () => void (await onMove("up")))} aria-label="Subir">

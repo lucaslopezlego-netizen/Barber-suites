@@ -20,7 +20,7 @@ export default async function ServicioPage({ params }: { params: Promise<{ id: s
 
   return (
     <>
-      <Link href="/admin/servicios" className="mb-4 inline-flex items-center gap-2 text-sm text-muted hover:text-cream">
+      <Link href="/admin/servicios" className="mb-4 inline-flex items-center gap-2 text-sm text-muted hover:text-fg">
         <ArrowLeft className="size-4" /> Servicios
       </Link>
       <PageHeader title={isNew ? "Agregar servicio" : `Editar ${service!.name}`} />

@@ -4,7 +4,7 @@ const STYLE: Record<BookingStatus, string> = {
   pendiente: "border-warn/40 bg-warn/10 text-warn",
   confirmada: "border-info/40 bg-info/10 text-info",
   completada: "border-ok/40 bg-ok/10 text-ok",
-  cancelada: "border-line-strong bg-panel-2 text-subtle line-through",
+  cancelada: "border-line-strong bg-surface-2 text-subtle line-through",
   no_asistio: "border-danger/40 bg-danger/10 text-danger",
 };
 

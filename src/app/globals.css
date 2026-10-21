@@ -1,87 +1,101 @@
 @import "tailwindcss";
 
 /* =========================================================================
-   Barber Suites · sistema visual
-   Negro profundo + dorado del logo. Una sola fuente display (Cinzel, como las
-   letras del logo) para títulos cortos y Manrope para todo lo demás.
+   Barber Suites · sistema visual (tema claro)
+   Pared blanca de barbería, tinta negra y dorado latón. El negro de cuero del
+   logo se reserva para el tablero de precios: es la única pieza oscura.
+   Cinzel (la letra del logo) en títulos, marca y precios; Manrope en el resto.
    ========================================================================= */
 
 @theme {
-  /* Negro real (el brief pide fondo negro) y superficies color cuero, como la textura del logo */
-  --color-ink: #000000;
-  --color-panel: #14110d;
-  --color-panel-2: #1d1914;
-  --color-line: #2c2720;
-  --color-line-strong: #40392f;
-  --color-cream: #eee7da;
-  --color-muted: #a59f95;
-  --color-subtle: #7b756b;
-  --color-gold: #c9a45c;
-  --color-gold-soft: #e3c98f;
-  --color-gold-deep: #8f6a2c;
-  --color-ok: #6fbf8a;
-  --color-warn: #e0b04f;
-  --color-danger: #e0715f;
-  --color-info: #79a7d9;
+  /* Superficies */
+  --color-page: #ffffff; /* fondo: blanco porcelana */
+  --color-surface: #f5f5f2; /* azulejo: secciones alternas, tarjetas, campos */
+  --color-surface-2: #ebebe6; /* estados hover, esqueletos de carga */
+  --color-line: #e2e2dc;
+  --color-line-strong: #c9c8c0;
+
+  /* Texto */
+  --color-fg: #1a1a1a; /* texto principal */
+  --color-muted: #57534e; /* texto secundario (7.6:1) */
+  --color-subtle: #6f6a63; /* notas y metadatos (5:1) */
+
+  /* Marca */
+  --color-onyx: #000000; /* negro del logo: títulos, botón principal, tablero */
+  --color-gold: #876527; /* latón: acentos sobre blanco (5.3:1) */
+  --color-gold-strong: #6e521f; /* precios y estados activos sobre blanco */
+  --color-gold-light: #e3c98f; /* dorado sobre negro (tablero de precios) */
+
+  /* Estados (todos ≥ 4.5:1 sobre blanco) */
+  --color-ok: #2e7d4f;
+  --color-warn: #9a6400;
+  --color-danger: #b8402c;
+  --color-info: #2b64a8;
 
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-cinzel), ui-serif, Georgia, serif;
 
-  --radius-card: 1.25rem;
+  --radius-card: 1rem;
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  background: var(--color-ink);
-  color: var(--color-cream);
+  background: var(--color-page);
+  color: var(--color-fg);
   font-family: var(--font-sans);
   font-feature-settings: "ss01", "cv11";
 }
 
 ::selection {
-  background: color-mix(in oklab, var(--color-gold) 45%, transparent);
-  color: var(--color-cream);
+  background: var(--color-gold-light);
+  color: var(--color-onyx);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-gold-soft);
+  outline: 2px solid var(--color-gold);
   outline-offset: 2px;
 }
 
 @layer components {
-  .btn-gold {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gold px-6 py-3.5 text-[15px] font-semibold text-ink transition hover:bg-gold-soft active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+  /* Botón principal: negro, como el logo. Hover en latón. */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-onyx px-6 py-3.5 text-[15px] font-semibold text-white transition hover:bg-gold active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
   }
-  .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-line-strong bg-panel/60 px-6 py-3.5 text-[15px] font-semibold text-cream transition hover:border-gold/60 hover:bg-panel active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-line-strong bg-page px-6 py-3.5 text-[15px] font-semibold text-fg transition hover:border-onyx active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
   }
   .card {
-    @apply rounded-[var(--radius-card)] border border-line bg-panel;
-  }
-  .eyebrow {
-    @apply text-sm font-semibold text-gold;
+    @apply rounded-[var(--radius-card)] border border-line bg-page;
   }
   .field {
-    @apply w-full rounded-xl border border-line-strong bg-ink px-4 py-3.5 text-base text-cream placeholder:text-subtle transition outline-none focus:border-gold focus:ring-2 focus:ring-gold/25;
+    @apply w-full rounded-xl border border-line-strong bg-page px-4 py-3.5 text-base text-fg placeholder:text-subtle transition outline-none focus:border-onyx focus:ring-2 focus:ring-gold/25;
   }
   .label {
-    @apply mb-1.5 block text-sm font-medium text-cream;
+    @apply mb-1.5 block text-sm font-medium text-fg;
   }
-  .grain {
+  /* Título de sección: Cinzel, la letra del logo */
+  .title-display {
+    @apply font-display font-semibold tracking-[0.02em] text-onyx;
+  }
+  /* Textura de cuero sobre el negro del tablero */
+  .leather {
     position: relative;
+    background-color: var(--color-onyx);
+    color: #fff;
   }
-  .grain::before {
+  .leather::before {
     content: "";
     position: absolute;
     inset: 0;
+    border-radius: inherit;
     pointer-events: none;
-    opacity: 0.06;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    opacity: 0.09;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   }
 }
 

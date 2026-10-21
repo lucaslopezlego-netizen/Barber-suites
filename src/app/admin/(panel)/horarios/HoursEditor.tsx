@@ -63,7 +63,7 @@ export function HoursEditor({ barberId, barberName, initial }: { barberId: strin
         const blocks = week[day];
         const works = blocks.length > 0;
         return (
-          <section key={day} className={`card p-4 ${works ? "" : "bg-panel/50"}`}>
+          <section key={day} className={`card p-4 ${works ? "" : "bg-surface/50"}`}>
             <div className="flex items-center justify-between gap-3">
               <label className="flex items-center gap-3">
                 <button
@@ -72,9 +72,9 @@ export function HoursEditor({ barberId, barberName, initial }: { barberId: strin
                   aria-checked={works}
                   aria-label={`${barberName} trabaja el ${WEEKDAY_NAMES[day]}`}
                   onClick={() => update(day, works ? [] : [{ start: "09:00", end: "18:00" }])}
-                  className={`relative h-7 w-12 shrink-0 rounded-full transition ${works ? "bg-gold" : "bg-line-strong"}`}
+                  className={`relative h-7 w-12 shrink-0 rounded-full transition ${works ? "bg-onyx" : "bg-line-strong"}`}
                 >
-                  <span className={`absolute top-1 size-5 rounded-full bg-cream shadow transition-all ${works ? "left-6" : "left-1"}`} />
+                  <span className={`absolute top-1 size-5 rounded-full bg-white shadow transition-all ${works ? "left-6" : "left-1"}`} />
                 </button>
                 <span className="font-semibold">{WEEKDAY_NAMES[day]}</span>
               </label>
@@ -111,7 +111,7 @@ export function HoursEditor({ barberId, barberName, initial }: { barberId: strin
                     <button
                       type="button"
                       onClick={() => update(day, blocks.filter((_, j) => j !== i))}
-                      className="grid size-10 shrink-0 place-items-center rounded-full text-muted hover:bg-panel-2 hover:text-danger"
+                      className="grid size-10 shrink-0 place-items-center rounded-full text-muted hover:bg-surface-2 hover:text-danger"
                       aria-label="Quitar bloque"
                     >
                       <Trash2 className="size-4" />
@@ -127,7 +127,7 @@ export function HoursEditor({ barberId, barberName, initial }: { barberId: strin
                     const e = `${String(Math.min(Math.floor(startM / 60) + 4, 23)).padStart(2, "0")}:00`;
                     update(day, [...blocks, { start: s, end: e }]);
                   }}
-                  className="inline-flex items-center gap-1.5 text-sm text-gold hover:text-gold-soft"
+                  className="inline-flex items-center gap-1.5 text-sm text-gold hover:text-gold-strong"
                 >
                   <Plus className="size-4" /> Agregar otro bloque (p. ej. después del almuerzo)
                 </button>
@@ -138,9 +138,9 @@ export function HoursEditor({ barberId, barberName, initial }: { barberId: strin
         );
       })}
 
-      <div className={`${dirty ? "sticky bottom-20 lg:bottom-4" : ""} z-10 space-y-3 rounded-2xl border border-line bg-ink/95 p-4 backdrop-blur`}>
+      <div className={`${dirty ? "sticky bottom-20 lg:bottom-4" : ""} z-10 space-y-3 rounded-2xl border border-line bg-page/95 p-4 backdrop-blur`}>
         <FormMessage state={result} />
-        <button type="button" onClick={save} disabled={pending || hasErrors || !dirty} className="btn-gold w-full">
+        <button type="button" onClick={save} disabled={pending || hasErrors || !dirty} className="btn-primary w-full">
           {pending ? "Guardando…" : dirty ? `Guardar horario de ${barberName}` : "Sin cambios"}
         </button>
       </div>

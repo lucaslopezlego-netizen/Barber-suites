@@ -43,7 +43,7 @@ export function Calendar({ today, lastDay, availability, selected, onSelect }: P
           type="button"
           onClick={() => shift(-1)}
           disabled={month <= firstMonth}
-          className="grid size-10 place-items-center rounded-full text-cream transition hover:bg-panel-2 disabled:opacity-25"
+          className="grid size-10 place-items-center rounded-full text-fg transition hover:bg-surface-2 disabled:opacity-25"
           aria-label="Mes anterior"
         >
           <ChevronLeft className="size-5" />
@@ -55,7 +55,7 @@ export function Calendar({ today, lastDay, availability, selected, onSelect }: P
           type="button"
           onClick={() => shift(1)}
           disabled={month >= lastMonth}
-          className="grid size-10 place-items-center rounded-full text-cream transition hover:bg-panel-2 disabled:opacity-25"
+          className="grid size-10 place-items-center rounded-full text-fg transition hover:bg-surface-2 disabled:opacity-25"
           aria-label="Mes siguiente"
         >
           <ChevronRight className="size-5" />
@@ -89,11 +89,11 @@ export function Calendar({ today, lastDay, availability, selected, onSelect }: P
               className={[
                 "relative grid aspect-square place-items-center rounded-xl text-[15px] font-semibold transition",
                 isSelected
-                  ? "bg-gold text-ink shadow-[0_6px_20px_-8px_rgb(201_164_92/0.8)]"
+                  ? "bg-onyx text-white"
                   : enabled
-                    ? "text-cream hover:bg-panel-2 hover:ring-1 hover:ring-gold/40"
+                    ? "text-fg hover:bg-surface-2 hover:ring-1 hover:ring-onyx/30"
                     : "text-subtle/50 line-through decoration-subtle/40",
-                loading && inRange ? "animate-pulse bg-panel-2/60" : "",
+                loading && inRange ? "animate-pulse bg-surface-2/60" : "",
               ].join(" ")}
             >
               {day}

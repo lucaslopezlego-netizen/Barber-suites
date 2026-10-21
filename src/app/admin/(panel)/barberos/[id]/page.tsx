@@ -18,7 +18,7 @@ export default async function BarberoPage({ params }: { params: Promise<{ id: st
 
   return (
     <>
-      <Link href="/admin/barberos" className="mb-4 inline-flex items-center gap-2 text-sm text-muted hover:text-cream">
+      <Link href="/admin/barberos" className="mb-4 inline-flex items-center gap-2 text-sm text-muted hover:text-fg">
         <ArrowLeft className="size-4" /> Barberos
       </Link>
       <PageHeader title={isNew ? "Agregar barbero" : `Editar a ${barber!.name}`} />

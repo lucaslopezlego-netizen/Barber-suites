@@ -33,7 +33,7 @@ export function AdminNav({ email }: { email: string }) {
   return (
     <>
       {/* Escritorio: barra lateral */}
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-60 flex-col border-r border-line bg-panel/60 p-4 lg:flex">
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-60 flex-col border-r border-line bg-page p-4 lg:flex">
         <Link href="/admin" className="mb-8 flex items-center gap-3 px-2">
           <Image src="/logo.png" alt="" width={36} height={36} />
           <span className="font-semibold">Panel Barber Suites</span>
@@ -45,7 +45,7 @@ export function AdminNav({ email }: { email: string }) {
               href={href}
               aria-current={isActive(pathname, href) ? "page" : undefined}
               className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition ${
-                isActive(pathname, href) ? "bg-gold/12 text-gold-soft" : "text-muted hover:bg-panel-2 hover:text-cream"
+                isActive(pathname, href) ? "bg-surface-2 font-semibold text-onyx" : "text-muted hover:bg-surface-2 hover:text-fg"
               }`}
             >
               <Icon className="size-[18px]" /> {label}
@@ -55,7 +55,7 @@ export function AdminNav({ email }: { email: string }) {
         <div className="border-t border-line pt-4">
           <p className="truncate px-3 text-xs text-subtle">{email}</p>
           <form action={signOut}>
-            <button className="mt-2 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-muted hover:bg-panel-2 hover:text-cream">
+            <button className="mt-2 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-muted hover:bg-surface-2 hover:text-fg">
               <LogOut className="size-[18px]" /> Cerrar sesión
             </button>
           </form>
@@ -68,7 +68,7 @@ export function AdminNav({ email }: { email: string }) {
       {/* Móvil: barra inferior */}
       <nav
         aria-label="Panel"
-        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-line bg-ink/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl lg:hidden"
+        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-line bg-page/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl lg:hidden"
       >
         {MAIN.map(({ href, label, icon: Icon }) => (
           <Link
@@ -92,10 +92,10 @@ export function AdminNav({ email }: { email: string }) {
       {open && (
         <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Más opciones">
           <button type="button" aria-label="Cerrar" className="absolute inset-0 bg-black/60" onClick={() => setOpen(false)} />
-          <div className="animate-rise absolute inset-x-0 bottom-0 rounded-t-3xl border-t border-line bg-panel p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+          <div className="animate-rise absolute inset-x-0 bottom-0 rounded-t-3xl border-t border-line bg-surface p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
             <div className="mb-2 flex items-center justify-between px-2">
               <p className="text-sm text-subtle">{email}</p>
-              <button type="button" onClick={() => setOpen(false)} className="grid size-9 place-items-center rounded-full hover:bg-panel-2" aria-label="Cerrar">
+              <button type="button" onClick={() => setOpen(false)} className="grid size-9 place-items-center rounded-full hover:bg-surface-2" aria-label="Cerrar">
                 <X className="size-5" />
               </button>
             </div>
@@ -105,14 +105,14 @@ export function AdminNav({ email }: { email: string }) {
                   key={href}
                   href={href}
                   className={`flex flex-col items-center gap-2 rounded-2xl border p-4 text-sm font-medium ${
-                    isActive(pathname, href) ? "border-gold/60 bg-gold/10 text-gold-soft" : "border-line bg-ink text-cream"
+                    isActive(pathname, href) ? "border-onyx bg-surface text-onyx" : "border-line bg-page text-fg"
                   }`}
                 >
                   <Icon className="size-6" /> {label}
                 </Link>
               ))}
               <form action={signOut} className="contents">
-                <button className="flex flex-col items-center gap-2 rounded-2xl border border-line bg-ink p-4 text-sm font-medium text-muted">
+                <button className="flex flex-col items-center gap-2 rounded-2xl border border-line bg-page p-4 text-sm font-medium text-muted">
                   <LogOut className="size-6" /> Salir
                 </button>
               </form>

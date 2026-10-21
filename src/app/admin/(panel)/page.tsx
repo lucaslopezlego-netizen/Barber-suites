@@ -71,7 +71,7 @@ export default async function ResumenPage() {
         title="Resumen"
         subtitle={formatDateLong(today, true)}
         action={
-          <Link href="/admin/agenda/nueva" className="btn-gold !py-2.5 text-sm">
+          <Link href="/admin/agenda/nueva" className="btn-primary !py-2.5 text-sm">
             <Plus className="size-4" /> Nueva cita
           </Link>
         }
@@ -92,7 +92,7 @@ export default async function ResumenPage() {
       {/* Próxima cita */}
       <section className="mt-6">
         {next ? (
-          <div className="card flex items-center gap-4 border-gold/30 bg-gold/[0.05] p-4">
+          <div className="card flex items-center gap-4 border-onyx/15 bg-surface p-4">
             <span className="grid size-11 shrink-0 place-items-center rounded-full bg-gold/15 text-gold">
               <CalendarClock className="size-5" />
             </span>
@@ -167,7 +167,7 @@ export default async function ResumenPage() {
               <p className="mt-1 text-2xl font-bold tabular-nums">{totalClients ?? 0}</p>
             </div>
           </div>
-          <Link href="/admin/clientes" className="text-sm font-semibold text-gold hover:text-gold-soft">
+          <Link href="/admin/clientes" className="text-sm font-semibold text-gold hover:text-gold-strong">
             Ver todos los clientes
           </Link>
         </aside>
@@ -194,7 +194,7 @@ function SectionTitle({ title, count, link }: { title: string; count?: number; l
         {count !== undefined && count > 0 && <span className="ml-2 text-sm font-normal text-subtle">({count})</span>}
       </h2>
       {link && (
-        <Link href={link.href} className="text-sm text-gold hover:text-gold-soft">
+        <Link href={link.href} className="text-sm text-gold hover:text-gold-strong">
           {link.label}
         </Link>
       )}

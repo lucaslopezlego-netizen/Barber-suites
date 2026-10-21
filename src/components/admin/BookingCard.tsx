@@ -29,21 +29,21 @@ export function BookingCard({ b, showBarber = true, compact = false }: { b: Admi
           </p>
           {!compact && (
             <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
-              <a href={`tel:${b.customer_phone}`} className="inline-flex items-center gap-1.5 text-muted hover:text-cream">
+              <a href={`tel:${b.customer_phone}`} className="inline-flex items-center gap-1.5 text-muted hover:text-fg">
                 <Phone className="size-3.5" /> {formatPhone(b.customer_phone)}
               </a>
               <a
                 href={whatsappUrl(b.customer_phone, `Hola ${b.customer_name.split(" ")[0]}, te escribimos de Barber Suites por tu cita.`)}
                 target="_blank"
                 rel="noopener"
-                className="inline-flex items-center gap-1.5 text-gold hover:text-gold-soft"
+                className="inline-flex items-center gap-1.5 text-gold hover:text-gold-strong"
               >
                 <MessageCircle className="size-3.5" /> WhatsApp
               </a>
             </div>
           )}
           {b.notes && !compact && (
-            <p className="mt-2 flex gap-1.5 rounded-lg bg-panel-2 px-3 py-2 text-sm text-muted">
+            <p className="mt-2 flex gap-1.5 rounded-lg bg-surface-2 px-3 py-2 text-sm text-muted">
               <StickyNote className="mt-0.5 size-3.5 shrink-0" /> {b.notes}
             </p>
           )}

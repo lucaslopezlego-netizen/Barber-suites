@@ -6,13 +6,13 @@ import { FacebookIcon, InstagramIcon, WhatsAppIcon } from "@/components/ui/brand
 
 export function SiteFooter({ whatsapp = BUSINESS.phone, instagram = BUSINESS.instagram }: { whatsapp?: string; instagram?: string | null }) {
   return (
-    <footer className="border-t border-line bg-panel/40">
+    <footer className="border-t border-line bg-surface">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-3">
             <Image src="/logo.png" alt="" width={48} height={48} className="size-12" />
             <p className="font-display text-lg font-semibold tracking-[0.16em] uppercase">
-              Barber <span className="text-gold">Suites</span>
+              Barber Suites
             </p>
           </div>
           <p className="mt-4 max-w-xs text-sm text-muted">{BUSINESS.slogan}.</p>
@@ -28,13 +28,13 @@ export function SiteFooter({ whatsapp = BUSINESS.phone, instagram = BUSINESS.ins
           <p className="eyebrow mb-3">Contacto</p>
           <ul className="space-y-2 text-muted">
             <li>
-              <a href={whatsappUrl(whatsapp)} target="_blank" rel="noopener" className="inline-flex items-center gap-2 hover:text-cream">
+              <a href={whatsappUrl(whatsapp)} target="_blank" rel="noopener" className="inline-flex items-center gap-2 hover:text-fg">
                 <WhatsAppIcon className="size-4" /> {BUSINESS.phoneDisplay}
               </a>
             </li>
             {instagram && (
               <li>
-                <a href={`https://instagram.com/${instagram}`} target="_blank" rel="noopener" className="inline-flex items-center gap-2 hover:text-cream">
+                <a href={`https://instagram.com/${instagram}`} target="_blank" rel="noopener" className="inline-flex items-center gap-2 hover:text-fg">
                   <InstagramIcon className="size-4" /> @{instagram}
                 </a>
               </li>
@@ -44,7 +44,7 @@ export function SiteFooter({ whatsapp = BUSINESS.phone, instagram = BUSINESS.ins
                 href="https://www.facebook.com/search/top?q=Barber%20Suites%20Caracas"
                 target="_blank"
                 rel="noopener"
-                className="inline-flex items-center gap-2 hover:text-cream"
+                className="inline-flex items-center gap-2 hover:text-fg"
               >
                 <FacebookIcon className="size-4" /> {BUSINESS.facebookName}
               </a>

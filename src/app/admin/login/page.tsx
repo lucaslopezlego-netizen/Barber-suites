@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Acceso del equipo", robots: { index:
 
 export default function LoginPage() {
   return (
-    <main className="grain grid min-h-dvh place-items-center px-4 py-10">
+    <main className="grid min-h-dvh bg-surface place-items-center px-4 py-10">
       <div className="w-full max-w-sm">
         <div className="mb-8 text-center">
           <Image src="/logo.png" alt="Barber Suites" width={88} height={88} className="mx-auto" priority />

@@ -55,7 +55,7 @@ export default async function AgendaPage({ searchParams }: { searchParams: Promi
         title="Agenda"
         subtitle={view === "dia" ? formatDateLong(date, true) : `Semana del ${formatDateShort(start)} al ${formatDateShort(addDays(start, 6))}`}
         action={
-          <Link href={`/admin/agenda/nueva?fecha=${date}${barberFilter ? `&barbero=${barberFilter}` : ""}`} className="btn-gold !py-2.5 text-sm">
+          <Link href={`/admin/agenda/nueva?fecha=${date}${barberFilter ? `&barbero=${barberFilter}` : ""}`} className="btn-primary !py-2.5 text-sm">
             <Plus className="size-4" /> Nueva cita
           </Link>
         }
@@ -65,13 +65,13 @@ export default async function AgendaPage({ searchParams }: { searchParams: Promi
       <div className="mb-5 space-y-3">
         <div className="flex flex-wrap items-center gap-2">
           <div className="flex items-center rounded-full border border-line-strong">
-            <Link href={href({ fecha: addDays(date, -step) })} className="grid size-11 place-items-center rounded-l-full hover:bg-panel-2" aria-label="Anterior">
+            <Link href={href({ fecha: addDays(date, -step) })} className="grid size-11 place-items-center rounded-l-full hover:bg-surface-2" aria-label="Anterior">
               <ChevronLeft className="size-5" />
             </Link>
             <Link href={href({ fecha: today })} className="px-3 text-sm font-medium hover:text-gold">
               Hoy
             </Link>
-            <Link href={href({ fecha: addDays(date, step) })} className="grid size-11 place-items-center rounded-r-full hover:bg-panel-2" aria-label="Siguiente">
+            <Link href={href({ fecha: addDays(date, step) })} className="grid size-11 place-items-center rounded-r-full hover:bg-surface-2" aria-label="Siguiente">
               <ChevronRight className="size-5" />
             </Link>
           </div>
@@ -81,7 +81,7 @@ export default async function AgendaPage({ searchParams }: { searchParams: Promi
                 key={v}
                 href={href({ vista: v })}
                 aria-current={view === v ? "page" : undefined}
-                className={`rounded-full px-4 py-2 font-medium ${view === v ? "bg-gold text-ink" : "text-muted hover:text-cream"}`}
+                className={`rounded-full px-4 py-2 font-medium ${view === v ? "bg-onyx text-white" : "text-muted hover:text-fg"}`}
               >
                 {v === "dia" ? "Día" : "Semana"}
               </Link>
@@ -116,7 +116,7 @@ export default async function AgendaPage({ searchParams }: { searchParams: Promi
             <div key={o.id} className="flex items-center gap-3 rounded-2xl border border-dashed border-line-strong p-4 text-sm text-muted">
               <Ban className="size-4 shrink-0 text-warn" />
               <span>
-                <span className="text-cream">{barberName(o.barber_id)}</span> bloqueado {timeSpan(o.starts_at, o.ends_at, date)}
+                <span className="text-fg">{barberName(o.barber_id)}</span> bloqueado {timeSpan(o.starts_at, o.ends_at, date)}
                 {o.reason ? ` · ${o.reason}` : ""}
               </span>
             </div>
@@ -133,8 +133,8 @@ export default async function AgendaPage({ searchParams }: { searchParams: Promi
             const dayBookings = bookings.filter((b) => toZonedParts(b.starts_at, DEFAULT_TZ).date === d);
             const dayOffs = (offs ?? []).filter((o) => Date.parse(o.starts_at) < Date.parse(dayRange(d, addDays(d, 1)).to) && Date.parse(o.ends_at) > Date.parse(dayRange(d, d).from));
             return (
-              <section key={d} className={`card overflow-hidden ${d === today ? "border-gold/50" : ""}`}>
-                <Link href={href({ fecha: d, vista: "dia" })} className="flex items-center justify-between border-b border-line px-4 py-3 hover:bg-panel-2">
+              <section key={d} className={`card overflow-hidden ${d === today ? "border-onyx" : ""}`}>
+                <Link href={href({ fecha: d, vista: "dia" })} className="flex items-center justify-between border-b border-line px-4 py-3 hover:bg-surface-2">
                   <span className="font-semibold capitalize">
                     {formatDateShort(d)}
                     {d === today && <span className="ml-2 text-xs text-gold">Hoy</span>}
@@ -186,7 +186,7 @@ function FilterChip({ href, active, label }: { href: string; active: boolean; la
       href={href}
       aria-current={active ? "page" : undefined}
       className={`shrink-0 rounded-full border px-4 py-2 text-sm font-medium whitespace-nowrap ${
-        active ? "border-gold bg-gold/15 text-gold-soft" : "border-line-strong text-muted hover:text-cream"
+        active ? "border-onyx bg-onyx text-white" : "border-line-strong text-muted hover:text-fg"
       }`}
     >
       {label}

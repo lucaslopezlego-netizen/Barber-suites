@@ -32,7 +32,7 @@ export function BarberForm({ barber, services, selected }: Props) {
           <Avatar name={name || "BS"} src={removePhoto ? null : barber?.photo_url} size={96} />
         )}
         <div className="space-y-2">
-          <label className="btn-ghost cursor-pointer !px-4 !py-2.5 text-sm">
+          <label className="btn-secondary cursor-pointer !px-4 !py-2.5 text-sm">
             <Camera className="size-4" /> {barber?.photo_url || preview ? "Cambiar foto" : "Subir foto"}
             <input
               type="file"
@@ -76,8 +76,8 @@ export function BarberForm({ barber, services, selected }: Props) {
         ) : (
           <div className="grid gap-2 sm:grid-cols-2">
             {services.map((s) => (
-              <label key={s.id} className="flex items-center gap-3 rounded-xl border border-line-strong px-4 py-3 text-sm has-[:checked]:border-gold/60 has-[:checked]:bg-gold/10">
-                <input type="checkbox" name="service_ids" value={s.id} defaultChecked={isNew || selected.includes(s.id)} className="size-5 accent-[var(--color-gold)]" />
+              <label key={s.id} className="flex items-center gap-3 rounded-xl border border-line-strong px-4 py-3 text-sm has-[:checked]:border-onyx has-[:checked]:bg-surface">
+                <input type="checkbox" name="service_ids" value={s.id} defaultChecked={isNew || selected.includes(s.id)} className="size-5 accent-[var(--color-onyx)]" />
                 {s.name}
                 {!s.active && <span className="text-xs text-subtle">(inactivo)</span>}
               </label>
@@ -87,7 +87,7 @@ export function BarberForm({ barber, services, selected }: Props) {
       </fieldset>
 
       <label className="flex items-center gap-3 text-sm">
-        <input type="checkbox" name="active" defaultChecked={barber?.active ?? true} className="size-5 accent-[var(--color-gold)]" />
+        <input type="checkbox" name="active" defaultChecked={barber?.active ?? true} className="size-5 accent-[var(--color-onyx)]" />
         Activo (aparece en la web y recibe reservas)
       </label>
 

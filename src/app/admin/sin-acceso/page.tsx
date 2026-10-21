@@ -9,7 +9,7 @@ export default function NoAccessPage() {
         <h1 className="mt-4 text-2xl font-bold">Sin acceso al panel</h1>
         <p className="mt-2 text-muted">Tu usuario existe, pero no está autorizado como administrador. Pide al dueño que te dé acceso.</p>
         <form action={signOut} className="mt-6">
-          <button className="btn-ghost">Cerrar sesión</button>
+          <button className="btn-secondary">Cerrar sesión</button>
         </form>
       </div>
     </main>

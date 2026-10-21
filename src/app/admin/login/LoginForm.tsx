@@ -69,7 +69,7 @@ export function LoginForm() {
           <button
             type="button"
             onClick={() => setShow(!show)}
-            className="absolute inset-y-0 right-0 grid w-12 place-items-center text-muted hover:text-cream"
+            className="absolute inset-y-0 right-0 grid w-12 place-items-center text-muted hover:text-fg"
             aria-label={show ? "Ocultar contraseña" : "Mostrar contraseña"}
           >
             {show ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
@@ -81,7 +81,7 @@ export function LoginForm() {
           {error}
         </p>
       )}
-      <button type="submit" disabled={loading} className="btn-gold w-full">
+      <button type="submit" disabled={loading} className="btn-primary w-full">
         {loading && <Loader2 className="size-5 animate-spin" />}
         {loading ? "Entrando…" : "Entrar"}
       </button>

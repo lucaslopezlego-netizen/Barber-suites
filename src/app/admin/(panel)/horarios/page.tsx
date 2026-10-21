@@ -30,7 +30,7 @@ export default async function HorariosPage({ searchParams }: { searchParams: Pro
                 href={`/admin/horarios?barbero=${b.id}`}
                 aria-current={current?.id === b.id ? "page" : undefined}
                 className={`shrink-0 rounded-full border px-4 py-2 text-sm font-medium whitespace-nowrap ${
-                  current?.id === b.id ? "border-gold bg-gold/15 text-gold-soft" : "border-line-strong text-muted hover:text-cream"
+                  current?.id === b.id ? "border-onyx bg-onyx text-white" : "border-line-strong text-muted hover:text-fg"
                 }`}
               >
                 {b.name}

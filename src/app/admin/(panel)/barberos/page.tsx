@@ -19,7 +19,7 @@ export default async function BarberosPage() {
         title="Barberos"
         subtitle="El orden de esta lista es el orden en que aparecen en la web."
         action={
-          <Link href="/admin/barberos/nuevo" className="btn-gold !py-2.5 text-sm">
+          <Link href="/admin/barberos/nuevo" className="btn-primary !py-2.5 text-sm">
             <Plus className="size-4" /> Agregar barbero
           </Link>
         }
@@ -44,7 +44,7 @@ export default async function BarberosPage() {
                   <ActiveToggle active={b.active} label={`Activar ${b.name}`} onToggle={toggleBarberActive.bind(null, b.id)} />
                   <div className="flex items-center gap-2">
                     <MoveButtons onMove={moveBarber.bind(null, b.id)} first={i === 0} last={i === barbers.length - 1} />
-                    <Link href={`/admin/barberos/${b.id}`} className="btn-ghost !px-4 !py-2 text-sm">
+                    <Link href={`/admin/barberos/${b.id}`} className="btn-secondary !px-4 !py-2 text-sm">
                       <Pencil className="size-4" /> Editar
                     </Link>
                   </div>

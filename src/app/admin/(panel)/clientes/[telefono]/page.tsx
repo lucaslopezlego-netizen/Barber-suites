@@ -26,7 +26,7 @@ export default async function ClientePage({ params }: { params: Promise<{ telefo
 
   return (
     <>
-      <Link href="/admin/clientes" className="mb-4 inline-flex items-center gap-2 text-sm text-muted hover:text-cream">
+      <Link href="/admin/clientes" className="mb-4 inline-flex items-center gap-2 text-sm text-muted hover:text-fg">
         <ArrowLeft className="size-4" /> Clientes
       </Link>
       <div className="card mb-6 p-5">
@@ -36,10 +36,10 @@ export default async function ClientePage({ params }: { params: Promise<{ telefo
           {summary.email ? ` · ${summary.email}` : ""}
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <a href={whatsappUrl(phone)} target="_blank" rel="noopener" className="btn-gold !py-2.5 text-sm">
+          <a href={whatsappUrl(phone)} target="_blank" rel="noopener" className="btn-primary !py-2.5 text-sm">
             <MessageCircle className="size-4" /> WhatsApp
           </a>
-          <a href={`tel:${phone}`} className="btn-ghost !py-2.5 text-sm">
+          <a href={`tel:${phone}`} className="btn-secondary !py-2.5 text-sm">
             <Phone className="size-4" /> Llamar
           </a>
         </div>

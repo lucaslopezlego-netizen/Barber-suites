@@ -222,7 +222,7 @@ export function BookingFlow(props: Props) {
     return (
       <div className="card p-6 text-center">
         <p className="text-muted">Las reservas en línea estarán disponibles muy pronto.</p>
-        <a href={whatsappUrl(whatsapp, "¡Hola! Quiero reservar una cita.")} className="btn-gold mt-5" target="_blank" rel="noopener">
+        <a href={whatsappUrl(whatsapp, "¡Hola! Quiero reservar una cita.")} className="btn-primary mt-5" target="_blank" rel="noopener">
           <WhatsAppIcon /> Reservar por WhatsApp
         </a>
       </div>
@@ -251,9 +251,9 @@ export function BookingFlow(props: Props) {
                     className="group w-full text-left disabled:cursor-default"
                   >
                     <span
-                      className={`block h-1 rounded-full transition-colors ${current ? "bg-gold" : done ? "bg-gold/55 group-hover:bg-gold" : "bg-line"}`}
+                      className={`block h-1 rounded-full transition-colors ${current ? "bg-onyx" : done ? "bg-gold group-hover:bg-onyx" : "bg-line"}`}
                     />
-                    <span className={`mt-2 hidden text-xs sm:block ${current ? "text-cream" : "text-subtle"}`}>{label}</span>
+                    <span className={`mt-2 hidden text-xs sm:block ${current ? "text-fg" : "text-subtle"}`}>{label}</span>
                   </button>
                 </li>
               );
@@ -273,7 +273,7 @@ export function BookingFlow(props: Props) {
       )}
 
       {notice && step !== 6 && (
-        <div role="alert" className="animate-rise mb-5 flex gap-3 rounded-2xl border border-warn/40 bg-warn/10 p-4 text-sm text-cream">
+        <div role="alert" className="animate-rise mb-5 flex gap-3 rounded-2xl border border-warn/40 bg-warn/10 p-4 text-sm text-fg">
           <AlertTriangle className="mt-0.5 size-5 shrink-0 text-warn" />
           <p>{notice}</p>
         </div>
@@ -349,7 +349,7 @@ export function BookingFlow(props: Props) {
                       <Clock className="size-3.5" /> {s.duration_min} min
                     </span>
                   </span>
-                  <span className="font-display text-xl font-semibold text-gold-soft">{formatUsd(s.price_usd)}</span>
+                  <span className="font-display text-xl font-semibold text-gold-strong">{formatUsd(s.price_usd)}</span>
                 </OptionCard>
               ))}
             </div>
@@ -403,13 +403,13 @@ export function BookingFlow(props: Props) {
           ) : slots === undefined ? (
             <div className="grid grid-cols-3 gap-2 sm:grid-cols-4" aria-busy="true" aria-label="Cargando horarios">
               {Array.from({ length: 12 }, (_, i) => (
-                <span key={i} className="h-12 animate-pulse rounded-xl bg-panel-2" />
+                <span key={i} className="h-12 animate-pulse rounded-xl bg-surface-2" />
               ))}
             </div>
           ) : slots.length === 0 ? (
             <div className="card p-5 text-center">
               <p className="text-muted">Ya no quedan horarios libres este día.</p>
-              <button type="button" className="btn-ghost mt-4" onClick={() => goTo(3)}>
+              <button type="button" className="btn-secondary mt-4" onClick={() => goTo(3)}>
                 Elegir otro día
               </button>
             </div>
@@ -431,8 +431,8 @@ export function BookingFlow(props: Props) {
                         }}
                         className={`h-12 rounded-xl border text-[15px] font-semibold tabular-nums transition ${
                           slot?.start === s.start
-                            ? "border-gold bg-gold text-ink"
-                            : "border-line-strong bg-panel text-cream hover:border-gold/70 hover:bg-panel-2"
+                            ? "border-onyx bg-onyx text-white"
+                            : "border-line-strong bg-page text-fg hover:border-onyx"
                         }`}
                       >
                         {formatTime12(s.time)}
@@ -547,11 +547,11 @@ export function BookingFlow(props: Props) {
               <SummaryRow label="Hora" value={formatTime12(slot.time)} />
               <div className="flex items-center justify-between border-t border-line pt-2">
                 <span className="text-muted">Total</span>
-                <span className="font-display text-lg font-semibold text-gold-soft">{formatUsd(service.price_usd)}</span>
+                <span className="font-display text-lg font-semibold text-gold-strong">{formatUsd(service.price_usd)}</span>
               </div>
             </div>
 
-            <button type="submit" className="btn-gold w-full" disabled={submitting}>
+            <button type="submit" className="btn-primary w-full" disabled={submitting}>
               {submitting ? (
                 <>
                   <Loader2 className="size-5 animate-spin" /> Reservando…
@@ -576,8 +576,8 @@ export function BookingFlow(props: Props) {
             ¡Reserva recibida!
           </h3>
           <p className="mx-auto mt-2 max-w-sm text-muted">
-            Te esperamos el <span className="text-cream">{formatDateLong(toZonedParts(booking.starts_at, timezone).date)}</span> a las{" "}
-            <span className="text-cream">{formatInstantTime(booking.starts_at, timezone)}</span>
+            Te esperamos el <span className="text-fg">{formatDateLong(toZonedParts(booking.starts_at, timezone).date)}</span> a las{" "}
+            <span className="text-fg">{formatInstantTime(booking.starts_at, timezone)}</span>
           </p>
 
           <div className="card mx-auto mt-6 max-w-md space-y-2 p-5 text-left text-sm">
@@ -590,13 +590,13 @@ export function BookingFlow(props: Props) {
           </div>
 
           <div className="mx-auto mt-6 grid max-w-md gap-3">
-            <a href={whatsappUrl(whatsapp, bookingWhatsappMessage(booking, timezone))} target="_blank" rel="noopener" className="btn-gold">
+            <a href={whatsappUrl(whatsapp, bookingWhatsappMessage(booking, timezone))} target="_blank" rel="noopener" className="btn-primary">
               <WhatsAppIcon /> Escribir a la barbería por WhatsApp
             </a>
-            <button type="button" onClick={downloadIcs} className="btn-ghost">
+            <button type="button" onClick={downloadIcs} className="btn-secondary">
               <CalendarPlus className="size-5" /> Agregar a mi calendario
             </button>
-            <button type="button" onClick={restart} className="mt-1 inline-flex items-center justify-center gap-2 text-sm text-muted hover:text-cream">
+            <button type="button" onClick={restart} className="mt-1 inline-flex items-center justify-center gap-2 text-sm text-muted hover:text-fg">
               <RotateCcw className="size-4" /> Hacer otra reserva
             </button>
           </div>
@@ -616,7 +616,7 @@ function Chip({ icon, text, onClick }: { icon: React.ReactNode; text: string; on
     <button
       type="button"
       onClick={onClick}
-      className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-line-strong bg-panel px-3 py-1.5 text-cream transition hover:border-gold/60"
+      className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-line-strong bg-surface px-3 py-1.5 text-fg transition hover:border-gold/60"
     >
       <span className="text-gold">{icon}</span>
       <span className="truncate">{text}</span>
@@ -643,7 +643,7 @@ function OptionCard({ selected, onClick, children }: { selected: boolean; onClic
       onClick={onClick}
       aria-pressed={selected}
       className={`flex w-full items-center gap-4 rounded-2xl border p-4 text-left transition active:scale-[0.99] ${
-        selected ? "border-gold bg-gold/10" : "border-line bg-panel hover:border-gold/50 hover:bg-panel-2"
+        selected ? "border-onyx bg-surface" : "border-line bg-page hover:border-onyx/40"
       }`}
     >
       {children}
@@ -653,7 +653,7 @@ function OptionCard({ selected, onClick, children }: { selected: boolean; onClic
 
 function BackButton({ onClick }: { onClick: () => void }) {
   return (
-    <button type="button" onClick={onClick} className="mt-6 inline-flex items-center gap-2 text-sm text-muted transition hover:text-cream">
+    <button type="button" onClick={onClick} className="mt-6 inline-flex items-center gap-2 text-sm text-muted transition hover:text-fg">
       <ArrowLeft className="size-4" /> Volver
     </button>
   );
@@ -664,7 +664,7 @@ function RetryBox({ text, onRetry }: { text: string; onRetry: () => void }) {
     <div role="alert" className="card flex flex-col items-center gap-3 p-6 text-center">
       <AlertTriangle className="size-6 text-warn" />
       <p className="text-muted">{text}</p>
-      <button type="button" className="btn-ghost" onClick={onRetry}>
+      <button type="button" className="btn-secondary" onClick={onRetry}>
         <RotateCcw className="size-4" /> Reintentar
       </button>
     </div>
@@ -675,7 +675,7 @@ function SummaryRow({ label, value, mono }: { label: string; value: string; mono
   return (
     <div className="flex items-start justify-between gap-4">
       <span className="text-muted">{label}</span>
-      <span className={`text-right font-medium text-cream first-letter:uppercase ${mono ? "font-mono tracking-wider" : ""}`}>{value}</span>
+      <span className={`text-right font-medium text-fg first-letter:uppercase ${mono ? "font-mono tracking-wider" : ""}`}>{value}</span>
     </div>
   );
 }

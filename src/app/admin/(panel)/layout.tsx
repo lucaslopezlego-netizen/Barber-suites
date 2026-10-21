@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export default async function PanelLayout({ children }: { children: React.ReactNode }) {
   const { user } = await requireAdmin();
   return (
-    <div className="min-h-dvh">
+    <div className="min-h-dvh bg-surface">
       <AdminNav email={user.email ?? ""} />
       <main className="px-4 pt-6 pb-28 sm:px-6 lg:ml-60 lg:px-10 lg:pt-10 lg:pb-12">
         <div className="mx-auto max-w-5xl">{children}</div>

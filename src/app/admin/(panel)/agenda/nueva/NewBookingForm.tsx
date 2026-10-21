@@ -109,7 +109,7 @@ export function NewBookingForm({ barbers, services, relations, defaultDate, defa
         <textarea id="notes" name="notes" maxLength={500} className="field min-h-20" />
       </div>
       <label className="flex items-start gap-3 text-sm text-muted">
-        <input type="checkbox" name="enforce" className="mt-0.5 size-5 accent-[var(--color-gold)]" />
+        <input type="checkbox" name="enforce" className="mt-0.5 size-5 accent-[var(--color-onyx)]" />
         <span>
           Respetar el horario y los bloqueos del barbero
           <span className="block text-xs text-subtle">Si lo dejas sin marcar, puedes agendar fuera de horario. Nunca se permiten dos citas a la vez.</span>

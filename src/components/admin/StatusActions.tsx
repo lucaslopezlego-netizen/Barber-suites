@@ -13,7 +13,7 @@ const ACTIONS: { status: BookingStatus; label: string; icon: typeof Check; style
     status: "cancelada",
     label: "Cancelar",
     icon: X,
-    style: "border-line-strong text-muted hover:bg-panel-2",
+    style: "border-line-strong text-muted hover:bg-surface-2",
     confirm: "¿Cancelar esta cita? El turno quedará libre para otros clientes.",
   },
 ];
