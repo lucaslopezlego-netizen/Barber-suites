@@ -264,7 +264,7 @@ export function BookingFlow(props: Props) {
           {(barberLabel || service || date) && (
             <div className="mb-5 flex flex-wrap gap-2 text-sm">
               {barberLabel && <Chip onClick={() => goTo(1)} icon={<Users className="size-3.5" />} text={barberLabel} />}
-              {service && <Chip onClick={() => goTo(2)} icon={<Scissors className="size-3.5" />} text={`${service.name} · ${formatUsd(service.price_usd)}`} />}
+              {service && <Chip onClick={() => goTo(2)} icon={<Scissors className="size-3.5" />} text={`${service.name}, ${formatUsd(service.price_usd)}`} />}
               {date && step > 3 && <Chip onClick={() => goTo(3)} icon={<CalendarPlus className="size-3.5" />} text={formatDateLong(date)} />}
               {slot && step > 4 && <Chip onClick={() => goTo(4)} icon={<Clock className="size-3.5" />} text={formatTime12(slot.time)} />}
             </div>
@@ -417,7 +417,7 @@ export function BookingFlow(props: Props) {
             <div className="space-y-5">
               {groupedSlots.map((g) => (
                 <div key={g.label}>
-                  <p className="mb-2 text-xs font-semibold tracking-wider text-subtle uppercase">{g.label}</p>
+                  <p className="mb-2 text-sm font-medium text-muted">{g.label}</p>
                   <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
                     {g.items.map((s) => (
                       <button
@@ -627,7 +627,7 @@ function Chip({ icon, text, onClick }: { icon: React.ReactNode; text: string; on
 function StepTitle({ n, title, subtitle, ref }: { n: number; title: string; subtitle?: string; ref: React.Ref<HTMLHeadingElement> }) {
   return (
     <div className="mb-4">
-      <p className="text-xs font-semibold tracking-wider text-subtle uppercase">Paso {n} de 5</p>
+      <p className="text-sm text-subtle">Paso {n} de 5</p>
       <h3 id="step-title" ref={ref} tabIndex={-1} className="mt-1 text-xl font-bold outline-none sm:text-2xl">
         {title}
       </h3>

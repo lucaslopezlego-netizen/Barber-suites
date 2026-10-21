@@ -23,7 +23,7 @@ export function Avatar({ name, src, size = 56, className = "" }: { name: string;
   return (
     <span
       aria-hidden="true"
-      className={`grid shrink-0 place-items-center rounded-full bg-gradient-to-br from-gold-soft/90 via-gold to-gold-deep font-display font-semibold text-ink ring-1 ring-gold/40 ${className}`}
+      className={`grid shrink-0 place-items-center rounded-full bg-panel-2 font-display font-semibold text-gold-soft ring-1 ring-gold/40 ${className}`}
       style={{ width: size, height: size, fontSize: size * 0.34 }}
     >
       {initials || "BS"}

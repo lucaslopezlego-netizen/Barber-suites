@@ -21,7 +21,7 @@ export function SiteFooter({ whatsapp = BUSINESS.phone, instagram = BUSINESS.ins
           <p className="eyebrow mb-3">Visítanos</p>
           <p className="text-muted">{BUSINESS.address}</p>
           <a href={BUSINESS.mapsUrl} target="_blank" rel="noopener" className="mt-2 inline-block text-gold hover:underline">
-            Cómo llegar →
+            Cómo llegar
           </a>
         </div>
         <div className="text-sm">
@@ -54,7 +54,7 @@ export function SiteFooter({ whatsapp = BUSINESS.phone, instagram = BUSINESS.ins
       </div>
       <div className="border-t border-line">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-5 text-xs text-subtle sm:px-6">
-          <p>© {new Date().getFullYear()} {BUSINESS.name} · Baruta, Caracas</p>
+          <p>© {new Date().getFullYear()} {BUSINESS.name}, Baruta, Caracas</p>
           <Link href="/admin" className="hover:text-muted">
             Acceso del equipo
           </Link>

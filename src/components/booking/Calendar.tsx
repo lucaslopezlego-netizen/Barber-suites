@@ -99,7 +99,7 @@ export function Calendar({ today, lastDay, availability, selected, onSelect }: P
               {day}
               {enabled && !isSelected && <span className="absolute bottom-1.5 size-1 rounded-full bg-gold" />}
               {date === today && !isSelected && (
-                <span className="absolute top-1 text-[9px] font-medium tracking-wide text-gold no-underline">HOY</span>
+                <span className="absolute top-0.5 text-[10px] font-medium text-gold no-underline">hoy</span>
               )}
             </button>
           );

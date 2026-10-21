@@ -139,7 +139,7 @@ export default async function AgendaPage({ searchParams }: { searchParams: Promi
                     {formatDateShort(d)}
                     {d === today && <span className="ml-2 text-xs text-gold">Hoy</span>}
                   </span>
-                  <span className="text-sm text-subtle">{dayBookings.filter((b) => b.status !== "cancelada").length} citas →</span>
+                  <span className="text-sm text-subtle">{dayBookings.filter((b) => b.status !== "cancelada").length} citas</span>
                 </Link>
                 <ul className="divide-y divide-line">
                   {dayOffs.map((o) => (

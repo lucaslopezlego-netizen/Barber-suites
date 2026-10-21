@@ -21,8 +21,7 @@ export default async function ReservarPage({ searchParams }: { searchParams: Pro
     <>
       <SiteHeader whatsapp={whatsapp} />
       <main className="mx-auto min-h-[70dvh] max-w-2xl px-4 pt-8 pb-16 sm:px-6 sm:pt-12">
-        <p className="eyebrow">Reserva en línea</p>
-        <h1 className="mt-3 mb-8 text-3xl font-bold tracking-tight sm:text-4xl">Reserva tu cita</h1>
+        <h1 className="mb-8 text-3xl font-bold tracking-tight sm:text-4xl">Reserva tu cita</h1>
         <BookingFlow
           barbers={catalog?.snapshot.barbers ?? []}
           services={catalog?.snapshot.services ?? []}

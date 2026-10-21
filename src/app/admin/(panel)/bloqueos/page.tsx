@@ -15,7 +15,7 @@ function describe(startsAt: string, endsAt: string) {
     return last === s.date ? `${formatDateLong(s.date)} · todo el día` : `Del ${formatDateLong(s.date)} al ${formatDateLong(last)}`;
   }
   if (s.date === e.date) return `${formatDateLong(s.date)} · ${formatInstantTime(startsAt, DEFAULT_TZ)} a ${formatInstantTime(endsAt, DEFAULT_TZ)}`;
-  return `${formatDateLong(s.date)} ${formatInstantTime(startsAt, DEFAULT_TZ)} → ${formatDateLong(e.date)} ${formatInstantTime(endsAt, DEFAULT_TZ)}`;
+  return `${formatDateLong(s.date)} ${formatInstantTime(startsAt, DEFAULT_TZ)} hasta el ${formatDateLong(e.date)} ${formatInstantTime(endsAt, DEFAULT_TZ)}`;
 }
 
 export default async function BloqueosPage() {

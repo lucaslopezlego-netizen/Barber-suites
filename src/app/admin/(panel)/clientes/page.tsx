@@ -101,7 +101,7 @@ export default async function ClientesPage({ searchParams }: { searchParams: Pro
           {/* Escritorio: tabla */}
           <div className="card hidden overflow-hidden md:block">
             <table className="w-full text-left text-sm">
-              <thead className="border-b border-line text-xs tracking-wider text-subtle uppercase">
+              <thead className="border-b border-line text-sm text-subtle">
                 <tr>
                   <th className="px-4 py-3 font-medium">Cliente</th>
                   <th className="px-4 py-3 text-right font-medium">Visitas</th>

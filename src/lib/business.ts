@@ -3,7 +3,7 @@ export const BUSINESS = {
   name: "Barber Suites",
   slogan: "Vive la mejor experiencia y servicio de barbería del este de Caracas",
   address: "Centro Comercial Santa Fe, Nivel C3, Local #20, Baruta, Caracas",
-  shortAddress: "C.C. Santa Fe, Nivel C3, Local #20 · Baruta",
+  shortAddress: "C.C. Santa Fe, nivel C3, local 20, Baruta",
   phone: "+584222522392",
   phoneDisplay: "+58 422-2522392",
   instagram: "cmbarber08",

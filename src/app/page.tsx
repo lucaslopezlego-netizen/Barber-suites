@@ -1,10 +1,9 @@
-import { ArrowRight, Clock, MapPin, Navigation, Phone } from "lucide-react";
+import { Clock, MapPin, Navigation, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { BookingFlow } from "@/components/booking/BookingFlow";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
-import { Avatar } from "@/components/ui/Avatar";
 import { InstagramIcon, WhatsAppIcon } from "@/components/ui/brand-icons";
 import { formatUsd } from "@/lib/booking-links";
 import { BUSINESS } from "@/lib/business";
@@ -49,23 +48,18 @@ export default async function HomePage() {
       <SiteHeader whatsapp={whatsapp} />
       <main>
         {/* ---------------------------------------------------------------- Hero */}
-        <section className="grain relative overflow-hidden">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-gold/10 blur-[120px]"
-          />
+        <section className="relative overflow-hidden">
           <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 pt-10 pb-14 sm:px-6 md:grid-cols-[1.1fr_0.9fr] md:pt-16 md:pb-20">
             <div>
-              <p className="eyebrow">Baruta · Caracas</p>
-              <h1 className="mt-4 text-[2.35rem] leading-[1.08] font-extrabold tracking-tight text-balance sm:text-5xl md:text-[3.5rem]">
-                La mejor experiencia de barbería del <span className="gold-text">este de Caracas</span>.
+              <h1 className="text-[2.35rem] leading-[1.08] font-extrabold tracking-tight text-balance sm:text-5xl md:text-[3.5rem]">
+                La mejor experiencia de barbería del este de Caracas.
               </h1>
               <p className="mt-5 max-w-md text-lg text-muted">
-                Fades, cortes clásicos, barba y color en el C.C. Santa Fe. Reserva en menos de un minuto, sin esperar.
+                Fades, cortes clásicos, barba y color en el Centro Comercial Santa Fe, Baruta. Elige barbero y hora en menos de un minuto.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link href="/reservar" className="btn-gold">
-                  Reservar mi cita <ArrowRight className="size-4" />
+                  Reservar mi cita
                 </Link>
                 <a href={whatsappUrl(whatsapp, "¡Hola! Quiero información.")} target="_blank" rel="noopener" className="btn-ghost">
                   <WhatsAppIcon className="size-[18px]" /> Escríbenos
@@ -89,12 +83,9 @@ export default async function HomePage() {
                   sizes="(min-width: 768px) 40vw, 90vw"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-transparent to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink/80 to-transparent" />
                 <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-3">
-                  <div>
-                    <p className="eyebrow">Trabajos realizados</p>
-                    <p className="mt-1 text-sm text-cream/90">Taper fade · textura natural</p>
-                  </div>
+                  <p className="text-sm text-cream/90">Taper fade con textura natural</p>
                   {fromPrice !== null && (
                     <p className="rounded-full border border-gold/40 bg-ink/70 px-3 py-1.5 text-sm backdrop-blur">
                       Desde <span className="font-semibold text-gold-soft">{formatUsd(fromPrice)}</span>
@@ -118,30 +109,38 @@ export default async function HomePage() {
         {/* ----------------------------------------------------------- Servicios */}
         <section id="servicios" className="scroll-mt-20 py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <SectionHead eyebrow="Servicios" title="Lo que hacemos" note="Precios en USD. El pago se realiza en la barbería." />
             {services.length === 0 ? (
-              <EmptyNote />
+              <>
+                <SectionHead title="Servicios y precios" />
+                <EmptyNote />
+              </>
             ) : (
-              <ul className="grid gap-x-12 md:grid-cols-2">
-                {services.map((s) => (
-                  <li key={s.id} className="border-b border-line">
-                    <Link href={`/reservar?servicio=${s.id}`} className="group flex items-start gap-4 py-5">
-                      <div className="min-w-0 flex-1">
+              /* Tablero de precios: el elemento protagonista de la página */
+              <div className="relative rounded-[2rem] border border-gold/35 bg-panel px-5 py-8 sm:px-12 sm:py-12">
+                <div aria-hidden="true" className="pointer-events-none absolute inset-2 rounded-[1.6rem] border border-gold/15" />
+                <div className="relative flex flex-col items-center text-center">
+                  <Image src="/logo.png" alt="" width={64} height={64} className="size-16" />
+                  <h2 className="mt-4 font-display text-3xl font-semibold tracking-[0.08em] text-gold-soft sm:text-4xl">Precios</h2>
+                  <p className="mt-2 text-sm text-muted">En dólares. Se paga en la barbería.</p>
+                </div>
+                <ul className="relative mt-8 grid gap-x-14 md:grid-cols-2">
+                  {services.map((s) => (
+                    <li key={s.id}>
+                      <Link href={`/reservar?servicio=${s.id}`} className="group block py-4" aria-label={`Reservar ${s.name}, ${formatUsd(s.price_usd)}`}>
                         <div className="flex items-baseline gap-3">
-                          <h3 className="text-lg font-semibold transition group-hover:text-gold-soft">{s.name}</h3>
-                          <span aria-hidden="true" className="mb-1 flex-1 border-b border-dotted border-line-strong" />
-                          <span className="font-display text-lg font-semibold text-gold-soft">{formatUsd(s.price_usd)}</span>
+                          <h3 className="text-lg font-semibold transition group-hover:text-gold-soft sm:text-xl">{s.name}</h3>
+                          <span aria-hidden="true" className="mb-1.5 flex-1 border-b-2 border-dotted border-gold/30" />
+                          <span className="font-display text-2xl font-semibold text-gold-soft tabular-nums">{formatUsd(s.price_usd)}</span>
                         </div>
-                        {s.description && <p className="mt-1 text-sm text-muted">{s.description}</p>}
-                        <p className="mt-2 inline-flex items-center gap-1.5 text-xs text-subtle">
-                          <Clock className="size-3.5" /> {s.duration_min} min
-                          <span className="ml-2 text-gold opacity-0 transition group-hover:opacity-100">Reservar →</span>
+                        <p className="mt-1 text-sm text-muted">
+                          {s.description ? `${s.description} ` : ""}
+                          <span className="whitespace-nowrap text-subtle">{s.duration_min} min</span>
                         </p>
-                      </div>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
           </div>
         </section>
@@ -149,24 +148,28 @@ export default async function HomePage() {
         {/* ------------------------------------------------------------ Barberos */}
         <section id="barberos" className="scroll-mt-20 border-t border-line bg-panel/30 py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <SectionHead eyebrow="El equipo" title="Nuestros barberos" />
+            <SectionHead title="Barberos" />
             {barbers.length === 0 ? (
               <EmptyNote />
             ) : (
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-3">
                 {barbers.map((b) => (
-                  <article key={b.id} className="card flex flex-col p-5">
-                    <div className="flex items-center gap-4">
-                      <Avatar name={b.name} src={b.photo_url} size={72} />
-                      <div>
-                        <h3 className="text-lg font-semibold">{b.name}</h3>
-                        <p className="text-sm text-subtle">
-                          {b.service_ids.length} {b.service_ids.length === 1 ? "servicio" : "servicios"}
-                        </p>
+                  <article key={b.id}>
+                    <Link href={`/reservar?barbero=${b.id}`} className="group block">
+                      <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-line bg-panel">
+                        {b.photo_url ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={b.photo_url} alt={b.name} className="size-full object-cover" />
+                        ) : (
+                          <span aria-hidden="true" className="grid size-full place-items-center font-display text-5xl text-gold/70">
+                            {initials(b.name)}
+                          </span>
+                        )}
                       </div>
-                    </div>
-                    {b.bio && <p className="mt-4 flex-1 text-sm text-muted">{b.bio}</p>}
-                    <Link href={`/reservar?barbero=${b.id}`} className="btn-ghost mt-5 !py-3 text-sm">
+                      <h3 className="mt-3 text-lg font-semibold group-hover:text-gold-soft">{b.name}</h3>
+                    </Link>
+                    {b.bio && <p className="mt-1 line-clamp-3 text-sm text-muted">{b.bio}</p>}
+                    <Link href={`/reservar?barbero=${b.id}`} className="mt-2 inline-block text-sm font-semibold text-gold underline-offset-4 hover:underline">
                       Reservar con {b.name.split(" ")[0]}
                     </Link>
                   </article>
@@ -179,7 +182,7 @@ export default async function HomePage() {
         {/* ------------------------------------------------------------ Trabajos */}
         <section id="trabajos" className="scroll-mt-20 py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <SectionHead eyebrow="Portafolio" title="Trabajos realizados" />
+            <SectionHead title="Trabajos realizados" />
             <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
               {GALLERY.map((g) => (
                 <figure key={g.src} className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-line">
@@ -205,7 +208,7 @@ export default async function HomePage() {
         {/* ------------------------------------------------------------- Reserva */}
         <section id="reservar" className="scroll-mt-20 border-t border-line bg-panel/30 py-16 sm:py-20">
           <div className="mx-auto max-w-2xl px-4 sm:px-6">
-            <SectionHead eyebrow="Reserva en línea" title="Aparta tu turno" note="Elige barbero, servicio, día y hora. Te confirmamos al instante." />
+            <SectionHead title="Reserva tu cita" note="Elige barbero, servicio, día y hora." />
             <BookingFlow
               barbers={barbers}
               services={services}
@@ -220,7 +223,7 @@ export default async function HomePage() {
         <section id="visitanos" className="scroll-mt-20 py-16 sm:py-20">
           <div className="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 md:grid-cols-2">
             <div>
-              <SectionHead eyebrow="Visítanos" title="Horario y ubicación" />
+              <SectionHead title="Horario y ubicación" />
               <div className="card divide-y divide-line">
                 {WEEK_ORDER.map((wd) => {
                   const h = hours.find((x) => x.weekday === wd);
@@ -251,7 +254,7 @@ export default async function HomePage() {
                 />
                 <div className="p-5">
                   <p className="font-semibold">Centro Comercial Santa Fe</p>
-                  <p className="mt-1 text-sm text-muted">Nivel C3, Local #20 · Baruta, Caracas</p>
+                  <p className="mt-1 text-sm text-muted">Nivel C3, local 20, Baruta, Caracas</p>
                   <div className="mt-4 grid grid-cols-2 gap-2">
                     <a href={BUSINESS.mapsUrl} target="_blank" rel="noopener" className="btn-ghost !py-3 text-sm">
                       <Navigation className="size-4" /> Cómo llegar
@@ -290,11 +293,20 @@ export default async function HomePage() {
   );
 }
 
-function SectionHead({ eyebrow, title, note }: { eyebrow: string; title: string; note?: string }) {
+function initials(name: string) {
+  return name
+    .replace(/\(.*?\)/g, "")
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((w) => w[0]?.toUpperCase() ?? "")
+    .join("");
+}
+
+function SectionHead({ title, note }: { title: string; note?: string }) {
   return (
     <div className="mb-8">
-      <p className="eyebrow">{eyebrow}</p>
-      <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
+      <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
       {note && <p className="mt-2 text-muted">{note}</p>}
     </div>
   );
@@ -303,7 +315,7 @@ function SectionHead({ eyebrow, title, note }: { eyebrow: string; title: string;
 function QuickFact({ icon, label, value, href }: { icon: React.ReactNode; label: string; value: string; href?: string }) {
   return (
     <div className="py-4 sm:px-6 sm:first:pl-0">
-      <dt className="flex items-center gap-2 text-xs tracking-wider text-subtle uppercase">
+      <dt className="flex items-center gap-2 text-sm text-subtle">
         <span className="text-gold">{icon}</span>
         {label}
       </dt>

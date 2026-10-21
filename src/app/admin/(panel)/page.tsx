@@ -1,4 +1,4 @@
-import { ArrowRight, CalendarClock, Plus } from "lucide-react";
+import { CalendarClock, Plus } from "lucide-react";
 import Link from "next/link";
 import { BarList } from "@/components/admin/BarList";
 import { BookingCard } from "@/components/admin/BookingCard";
@@ -97,7 +97,7 @@ export default async function ResumenPage() {
               <CalendarClock className="size-5" />
             </span>
             <div className="min-w-0 flex-1">
-              <p className="text-xs tracking-wider text-subtle uppercase">Próxima cita</p>
+              <p className="text-sm text-subtle">Próxima cita</p>
               <p className="truncate font-semibold">
                 {formatInstantTime(next.starts_at, DEFAULT_TZ)} · {next.customer_name}
               </p>
@@ -167,8 +167,8 @@ export default async function ResumenPage() {
               <p className="mt-1 text-2xl font-bold tabular-nums">{totalClients ?? 0}</p>
             </div>
           </div>
-          <Link href="/admin/clientes" className="flex items-center justify-between text-sm text-gold hover:text-gold-soft">
-            Ver todos los clientes <ArrowRight className="size-4" />
+          <Link href="/admin/clientes" className="text-sm font-semibold text-gold hover:text-gold-soft">
+            Ver todos los clientes
           </Link>
         </aside>
       </div>
@@ -195,7 +195,7 @@ function SectionTitle({ title, count, link }: { title: string; count?: number; l
       </h2>
       {link && (
         <Link href={link.href} className="text-sm text-gold hover:text-gold-soft">
-          {link.label} →
+          {link.label}
         </Link>
       )}
     </div>

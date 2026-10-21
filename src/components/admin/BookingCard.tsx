@@ -21,11 +21,11 @@ export function BookingCard({ b, showBarber = true, compact = false }: { b: Admi
           <div className="flex flex-wrap items-center gap-2">
             <h3 className="truncate font-semibold">{b.customer_name}</h3>
             <StatusBadge status={b.status} />
-            {b.source === "admin" && <span className="text-[11px] text-subtle">· creada en el panel</span>}
+            {b.source === "admin" && <span className="text-xs text-subtle">creada en el panel</span>}
           </div>
           <p className="mt-0.5 text-sm text-muted">
-            {b.service?.name ?? "Servicio"} · {formatUsd(b.price_usd)}
-            {showBarber && b.barber ? ` · ${b.barber.name}` : ""}
+            {b.service?.name ?? "Servicio"}, {formatUsd(b.price_usd)}
+            {showBarber && b.barber ? `, con ${b.barber.name}` : ""}
           </p>
           {!compact && (
             <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">

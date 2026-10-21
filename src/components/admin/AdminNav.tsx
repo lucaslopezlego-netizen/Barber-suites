@@ -36,9 +36,7 @@ export function AdminNav({ email }: { email: string }) {
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-60 flex-col border-r border-line bg-panel/60 p-4 lg:flex">
         <Link href="/admin" className="mb-8 flex items-center gap-3 px-2">
           <Image src="/logo.png" alt="" width={36} height={36} />
-          <span className="font-display text-sm font-semibold tracking-[0.14em] uppercase">
-            Panel <span className="text-gold">BS</span>
-          </span>
+          <span className="font-semibold">Panel Barber Suites</span>
         </Link>
         <nav className="flex flex-1 flex-col gap-1" aria-label="Panel">
           {[...MAIN, ...MORE].map(({ href, label, icon: Icon }) => (
@@ -62,7 +60,7 @@ export function AdminNav({ email }: { email: string }) {
             </button>
           </form>
           <Link href="/" className="mt-1 block px-3 py-1 text-xs text-subtle hover:text-muted">
-            Ver la web →
+            Ver la web
           </Link>
         </div>
       </aside>

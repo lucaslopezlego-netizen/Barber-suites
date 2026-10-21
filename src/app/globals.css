@@ -7,16 +7,17 @@
    ========================================================================= */
 
 @theme {
-  --color-ink: #0a0a0b;
-  --color-panel: #131315;
-  --color-panel-2: #1a1a1d;
-  --color-line: #2a2a2f;
-  --color-line-strong: #3a3a41;
-  --color-cream: #f3efe6;
-  --color-muted: #a5a2a0;
-  --color-subtle: #75726f;
+  /* Negro real (el brief pide fondo negro) y superficies color cuero, como la textura del logo */
+  --color-ink: #000000;
+  --color-panel: #14110d;
+  --color-panel-2: #1d1914;
+  --color-line: #2c2720;
+  --color-line-strong: #40392f;
+  --color-cream: #eee7da;
+  --color-muted: #a59f95;
+  --color-subtle: #7b756b;
   --color-gold: #c9a45c;
-  --color-gold-soft: #e4c98d;
+  --color-gold-soft: #e3c98f;
   --color-gold-deep: #8f6a2c;
   --color-ok: #6fbf8a;
   --color-warn: #e0b04f;
@@ -54,12 +55,7 @@ body {
 
 @layer components {
   .btn-gold {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[15px] font-semibold text-ink transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
-    background: linear-gradient(135deg, #f0d896 0%, #c9a45c 48%, #9c7633 100%);
-    box-shadow: 0 8px 30px -12px rgb(201 164 92 / 0.6), inset 0 1px 0 rgb(255 255 255 / 0.35);
-  }
-  .btn-gold:hover:not(:disabled) {
-    filter: brightness(1.06);
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gold px-6 py-3.5 text-[15px] font-semibold text-ink transition hover:bg-gold-soft active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-ghost {
     @apply inline-flex items-center justify-center gap-2 rounded-full border border-line-strong bg-panel/60 px-6 py-3.5 text-[15px] font-semibold text-cream transition hover:border-gold/60 hover:bg-panel active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
@@ -68,19 +64,13 @@ body {
     @apply rounded-[var(--radius-card)] border border-line bg-panel;
   }
   .eyebrow {
-    @apply font-display text-[11px] tracking-[0.32em] text-gold uppercase;
+    @apply text-sm font-semibold text-gold;
   }
   .field {
     @apply w-full rounded-xl border border-line-strong bg-ink px-4 py-3.5 text-base text-cream placeholder:text-subtle transition outline-none focus:border-gold focus:ring-2 focus:ring-gold/25;
   }
   .label {
     @apply mb-1.5 block text-sm font-medium text-cream;
-  }
-  .gold-text {
-    background: linear-gradient(120deg, #f3dc9f 0%, #c9a45c 45%, #e8cd8f 70%, #a47c36 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
   }
   .grain {
     position: relative;
