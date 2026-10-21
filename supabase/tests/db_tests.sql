@@ -232,6 +232,7 @@ select pg_temp.eq((select count(*) from public.settings)::text, '1', 'admin lee 
 select pg_temp.eq(((select count(*) from public.admin_customers) > 0)::text, 'true', 'admin ve la vista de clientes');
 select pg_temp.eq(
   (select total_bookings::text from public.admin_customers where phone = '+584249999999'), '3', 'clientes: agrupa citas por teléfono');
+select pg_temp.eq(public.unaccent_lower('María Rodríguez'), 'maria rodriguez', 'búsqueda de clientes sin acentos');
 select pg_temp.eq(
   (public.admin_create_booking(:b1, :corte, pg_temp.at_local(1, '19:00'), 'Sin cita', '0412 555 0000') ->> 'status'),
   'confirmada', 'admin crea cita fuera de horario (cliente sin cita previa)');
@@ -250,6 +251,33 @@ select pg_temp.eq(
   (select status::text from public.bookings where customer_name = 'Sin cita'), 'completada', 'admin cambia estado de una cita');
 update public.settings set slot_interval_min = 30 where id = 1;
 select pg_temp.eq((select slot_interval_min::text from public.settings), '30', 'admin cambia ajustes');
+select pg_temp.eq(public.admin_set_working_hours(:b3, '[{"weekday":1,"start_time":"09:00","end_time":"12:00"},{"weekday":1,"start_time":"13:00","end_time":"17:00"}]')::text, '2', 'admin reemplaza el horario semanal');
+do $$
+begin
+  perform public.admin_set_working_hours('33333333-3333-4333-8333-333333333333', '[{"weekday":1,"start_time":"09:00","end_time":"12:00"},{"weekday":1,"start_time":"11:00","end_time":"17:00"}]');
+  raise exception 'FALLO: horario solapado aceptado';
+exception when raise_exception then
+  if sqlerrm <> 'OVERLAP' then raise; end if;
+  raise notice 'ok  · horario solapado rechazado (y el anterior se conserva)';
+end;
+$$;
+select pg_temp.eq((select count(*) from public.working_hours where barber_id = :b3)::text, '2', 'el horario anterior sigue intacto tras el error');
+select public.admin_set_barber_services(:b3, array[:corte]::uuid[]);
+select pg_temp.eq((select count(*) from public.barber_services where barber_id = :b3)::text, '1', 'admin asigna servicios a un barbero');
+reset role;
+
+\echo '--- Panel: un no-admin no puede cambiar horarios'
+set role authenticated;
+select set_config('request.jwt.claims', '{"role":"authenticated","sub":"99999999-0000-4000-8000-000000000002"}', false);
+do $$
+begin
+  perform public.admin_set_working_hours('11111111-1111-4111-8111-111111111111', '[]');
+  raise exception 'FALLO: no-admin cambió horarios';
+exception when raise_exception then
+  if sqlerrm <> 'FORBIDDEN' then raise; end if;
+  raise notice 'ok  · no-admin no puede cambiar horarios';
+end;
+$$;
 reset role;
 
 \echo ''
