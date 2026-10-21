@@ -1,12 +1,10 @@
 "use client";
 
 import { Eye, EyeOff, Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { createBrowserSupabase } from "@/lib/supabase/browser";
 
 export function LoginForm() {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
@@ -26,8 +24,9 @@ export function LoginForm() {
         );
         return;
       }
-      router.replace("/admin");
-      router.refresh();
+      // Navegación completa: evita que el navegador reutilice la versión de /admin
+      // guardada antes de iniciar sesión (que redirigía otra vez al login).
+      window.location.assign("/admin");
     } catch {
       setError("Sin conexión. Revisa tu internet.");
     } finally {

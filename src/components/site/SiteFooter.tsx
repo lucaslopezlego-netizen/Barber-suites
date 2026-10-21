@@ -55,7 +55,7 @@ export function SiteFooter({ whatsapp = BUSINESS.phone, instagram = BUSINESS.ins
       <div className="border-t border-line">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-5 text-xs text-subtle sm:px-6">
           <p>© {new Date().getFullYear()} {BUSINESS.name}, Baruta, Caracas</p>
-          <Link href="/admin" className="hover:text-muted">
+          <Link href="/admin" prefetch={false} className="hover:text-muted">
             Acceso del equipo
           </Link>
         </div>
