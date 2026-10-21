@@ -116,7 +116,7 @@ npm run build
    npx supabase link --project-ref <ref-del-proyecto>
    npx supabase db push
    ```
-   (Alternativa: pega cada archivo de `supabase/migrations/` en orden en el *SQL Editor*.)
+   (Alternativa sin terminal: abre `supabase/instalar-todo.sql`, cópialo entero en el *SQL Editor* de Supabase y pulsa *Run*. Incluye todas las migraciones y los datos de ejemplo. Si cambias una migración, regenera ese archivo.)
 3. **Datos de ejemplo (opcional):** ejecuta `supabase/seed.sql` en el SQL Editor. Son de ejemplo: el dueño los reemplaza desde el panel.
 4. **Auth:**
    - *Authentication → Sign In / Providers → Email*: deja Email activado y **desactiva "Allow new users to sign up"**. Los usuarios del panel se crean a mano (paso 7).
