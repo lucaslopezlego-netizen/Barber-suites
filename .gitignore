@@ -40,3 +40,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Página privada generada (lleva el correo y la clave)
+/vista-privada/dist/
+/vista-privada/assets.ts
