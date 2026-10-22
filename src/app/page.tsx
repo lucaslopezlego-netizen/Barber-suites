@@ -1,7 +1,8 @@
-import { Clock, MapPin, Navigation, Phone } from "lucide-react";
+import { Clock, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { BookingFlow } from "@/components/booking/BookingFlow";
+import { WeekSchedule } from "@/components/site/WeekSchedule";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { InstagramIcon, WhatsAppIcon } from "@/components/ui/brand-icons";
@@ -9,7 +10,7 @@ import { formatUsd } from "@/lib/booking-links";
 import { BUSINESS } from "@/lib/business";
 import { whatsappUrl } from "@/lib/phone";
 import { getCatalog, type WeeklyHours } from "@/lib/public-data";
-import { formatRangeShort, formatTime12, toZonedParts, WEEKDAY_NAMES } from "@/lib/tz";
+import { formatTime12, toZonedParts } from "@/lib/tz";
 
 export const revalidate = 60;
 
@@ -20,9 +21,6 @@ const GALLERY = [
 
 // Mismo ancho y márgenes en todas las secciones
 const CONTAINER = "mx-auto max-w-6xl px-4 sm:px-6";
-
-// Lunes primero, domingo al final
-const WEEK_ORDER = [1, 2, 3, 4, 5, 6, 0];
 
 function todayStatus(hours: WeeklyHours[], tz: string) {
   const now = toZonedParts(new Date(), tz);
@@ -44,10 +42,7 @@ export default async function HomePage() {
   const hours = info?.weekly_hours ?? [];
   const status = hours.length ? todayStatus(hours, tz) : null;
   const todayWeekday = toZonedParts(new Date(), tz).weekday;
-  // Quién atiende cada día (nombres en el orden de la web)
   const workingHours = catalog?.snapshot.working_hours ?? [];
-  const barbersOn = (weekday: number) =>
-    barbers.filter((b) => workingHours.some((w) => w.barber_id === b.id && w.weekday === weekday)).map((b) => b.name);
   const fromPrice = services.length ? Math.min(...services.map((s) => Number(s.price_usd))) : null;
 
   return (
@@ -224,32 +219,8 @@ export default async function HomePage() {
         <Section id="visitanos" title="Horario y ubicación" note="Centro Comercial Santa Fe, nivel C3, local 20, Baruta.">
           <div className="grid gap-6 md:grid-cols-2">
             <div className="self-start">
-              <ul className="card divide-y divide-line">
-                {WEEK_ORDER.map((wd) => {
-                  const h = hours.find((x) => x.weekday === wd);
-                  const isToday = wd === todayWeekday;
-                  const team = barbersOn(wd);
-                  return (
-                    <li key={wd} className={`grid grid-cols-[6.5rem_1fr] gap-x-4 px-5 py-3.5 text-sm ${isToday ? "bg-surface" : ""}`}>
-                      <span className={isToday ? "font-semibold text-onyx" : "text-muted"}>
-                        {WEEKDAY_NAMES[wd]}
-                        {isToday && <span className="ml-2 text-xs font-semibold text-gold">hoy</span>}
-                      </span>
-                      <span>
-                        <span className={`block tabular-nums ${h?.open ? "text-fg" : "text-subtle"}`}>
-                          {h?.open && h.close ? formatRangeShort(h.open, h.close) : hours.length ? "Cerrado" : "Por confirmar"}
-                        </span>
-                        {team.length > 0 && (
-                          <span className="mt-0.5 block text-xs text-subtle">
-                            {team.length === barbers.length && barbers.length > 1 ? "Todo el equipo" : team.join(", ")}
-                          </span>
-                        )}
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
-              <p className="mt-3 text-xs text-subtle">Debajo de cada día ves quién atiende. Para ver las horas libres de cada barbero, usa la reserva.</p>
+              <WeekSchedule hours={hours} barbers={barbers} workingHours={workingHours} todayWeekday={todayWeekday} />
+              <p className="mt-3 text-xs text-subtle">Toca un día para ver quién atiende y en qué horario. Las horas libres las ves al reservar.</p>
             </div>
             <div className="card self-start overflow-hidden">
               <iframe
@@ -261,10 +232,10 @@ export default async function HomePage() {
               />
               <div className="grid grid-cols-2 gap-2 p-4">
                 <a href={BUSINESS.mapsUrl} target="_blank" rel="noopener" className="btn-secondary !py-3 text-sm">
-                  <Navigation className="size-4" /> Cómo llegar
+                  Cómo llegar
                 </a>
                 <a href={`tel:${BUSINESS.phone}`} className="btn-secondary !py-3 text-sm">
-                  <Phone className="size-4" /> Llamar
+                  Llamar
                 </a>
               </div>
             </div>
