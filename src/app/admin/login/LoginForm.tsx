@@ -3,6 +3,7 @@
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { createBrowserSupabase } from "@/lib/supabase/browser";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
@@ -32,6 +33,18 @@ export function LoginForm() {
     } finally {
       setLoading(false);
     }
+  }
+
+  if (!isSupabaseConfigured()) {
+    return (
+      <div role="alert" className="card space-y-2 p-6 text-sm">
+        <p className="font-semibold text-onyx">El panel todavía no está conectado a la base de datos.</p>
+        <p className="text-muted">
+          Falta conectar Supabase en Vercel (las variables NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY y
+          SUPABASE_SERVICE_ROLE_KEY) y volver a publicar. Cuando esté conectado, aquí podrás entrar con tu correo y tu clave.
+        </p>
+      </div>
+    );
   }
 
   return (

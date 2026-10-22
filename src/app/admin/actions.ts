@@ -7,6 +7,7 @@ import { requireAdmin } from "@/lib/admin/auth";
 import { friendlyError } from "@/lib/admin/errors";
 import type { ActionResult, BookingStatus } from "@/lib/admin/types";
 import { isValidPhone, normalizePhone } from "@/lib/phone";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createSessionClient } from "@/lib/supabase/server";
 import { addDays, DEFAULT_TZ, timeToMinutes, zonedToUtc } from "@/lib/tz";
 
@@ -31,8 +32,10 @@ function revalidatePublic() {
 // Sesión
 // ---------------------------------------------------------------------------
 export async function signOut() {
-  const supabase = await createSessionClient();
-  await supabase.auth.signOut();
+  if (isSupabaseConfigured()) {
+    const supabase = await createSessionClient();
+    await supabase.auth.signOut();
+  }
   redirect("/admin/login");
 }
 
