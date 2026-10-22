@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { redirect } from "next/navigation";
+import { getSetupStatus, needsSetup } from "@/lib/setup/status";
 import { LoginForm } from "./LoginForm";
 
 export const metadata: Metadata = { title: "Acceso del equipo", robots: { index: false } };
 
-export default function LoginPage() {
+export const dynamic = "force-dynamic";
+
+export default async function LoginPage() {
+  // Primera vez: todavía no hay base de datos o administrador ⇒ crear el acceso
+  if (needsSetup(await getSetupStatus())) redirect("/admin/configurar");
   return (
     <main className="grid min-h-dvh bg-surface place-items-center px-4 py-10">
       <div className="w-full max-w-sm">

@@ -126,6 +126,10 @@ npm run build
 
 ### 7. Crear el primer admin
 
+**Forma automática (recomendada):** con Supabase conectado en Vercel (integración de Storage, que crea `NEXT_PUBLIC_SUPABASE_URL`, la clave pública, `SUPABASE_SERVICE_ROLE_KEY` y `POSTGRES_URL`), abre `https://<tu-dominio>/admin`. Mientras no haya ningún administrador, la web muestra **"Crea tu acceso al panel"**: escribes correo y clave (mínimo 6 caracteres) y la web crea las tablas (si la base está vacía, con `supabase/instalar-todo.sql`), el usuario y el permiso de administrador, e inicia la sesión. Esa pantalla deja de funcionar en cuanto existe un administrador.
+
+**Forma manual:**
+
 1. *Authentication → Users → Add user → Create new user*: email y contraseña, marca **Auto Confirm User**.
 2. En el *SQL Editor*:
    ```sql

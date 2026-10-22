@@ -1,7 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-// Refresca la sesión de Supabase y protege /admin (salvo /admin/login).
+// Refresca la sesión de Supabase y protege /admin (salvo el login y la configuración inicial).
 export async function middleware(request: NextRequest) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -25,8 +25,9 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const isLogin = request.nextUrl.pathname.startsWith("/admin/login");
-  if (!user && !isLogin) {
+  const path = request.nextUrl.pathname;
+  const isPublic = path.startsWith("/admin/login") || path.startsWith("/admin/configurar");
+  if (!user && !isPublic) {
     const login = request.nextUrl.clone();
     login.pathname = "/admin/login";
     login.search = "";
