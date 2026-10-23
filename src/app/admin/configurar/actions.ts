@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import type { ActionResult } from "@/lib/admin/types";
 import { installDatabase } from "@/lib/setup/install";
+import { markAccessCurrent } from "@/lib/setup/reset";
 import { getSetupStatus, needsSetup } from "@/lib/setup/status";
 import { createSessionClient } from "@/lib/supabase/server";
 import { createServiceClient } from "@/lib/supabase/service";
@@ -75,6 +76,7 @@ export async function setupFirstAdmin(_prev: ActionResult | null, fd: FormData):
     console.error("[configurar] admin", ins.error);
     return { ok: false, message: "No se pudo dar acceso de administrador. Inténtalo de nuevo." };
   }
+  await markAccessCurrent();
 
   // La portada y la reserva muestran ya los datos de la base
   revalidatePath("/");

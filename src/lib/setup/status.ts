@@ -1,6 +1,7 @@
 import "server-only";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createServiceClient } from "@/lib/supabase/service";
+import { applyAccessReset } from "./reset";
 
 export interface SetupStatus {
   /** Hay URL, clave pública y clave secreta de Supabase. */
@@ -19,6 +20,7 @@ export function postgresUrl() {
 }
 
 export async function getSetupStatus(): Promise<SetupStatus> {
+  await applyAccessReset();
   const service = createServiceClient();
   const connected = isSupabaseConfigured() && service !== null;
   const canInstall = Boolean(postgresUrl());

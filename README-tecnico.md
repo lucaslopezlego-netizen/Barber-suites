@@ -138,6 +138,8 @@ npm run build
    ```
 3. Entra en `https://<tu-dominio>/admin` con ese email y contraseña.
 
+**Restablecer el acceso desde el código:** sube en 1 el número `ACCESS_RESET` de `src/lib/setup/reset.ts` y publica. En la próxima visita a `/admin` se borra el usuario del encargado y vuelve a aparecer "Crea tu acceso al panel". Las citas, barberos y servicios no se tocan. Requiere `POSTGRES_URL`.
+
 Para quitar el acceso a alguien: `delete from public.admins where user_id = (select id from auth.users where email = '…');`
 
 ## 8. Deploy en Vercel
